@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Log In | IMD</title>
+        <link rel="icon" href="icon.png" type="image/x-icon">
+        <link rel="stylesheet" href="css/reset.css" type="text/css"> <!-- CSS reset -->
+        <link rel="stylesheet" href="css/login.css" type="text/css"> <!-- main styling -->
+
+
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="js/showpassword.js"></script>
+    </head>
+    <body>
+
+
+
+        <img id="logo" src="fplus-logo.png" alt="logo"/>
+
+
+        <div class="login">
+          <h1>Login</h1>
+          <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>
+            <p><input type="text" name="login" value="" placeholder="Username" required></p>
+            <p><input type="password" name="password" value="" placeholder="Password" required></p>
+            <p class="submit"><input type="submit" value="Submit"></p>
+          </form>
+        </div>
+
+        <div class="login-help">
+          <p>Don't have an account? <a href="signup.html">Click here to create one</a>.</p>
+        </div>
+    </body>
+</html>

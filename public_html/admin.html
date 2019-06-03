@@ -1,0 +1,20 @@
+<?php
+session_start();
+$set = isset($_SESSION["username"]);
+if(!$set){
+    session_destroy();
+    unset($_SESSION["username"]);
+    header("Location: index.html?error=timed_out");
+    exit();
+}
+?>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Admin</title>
+</head>
+<body>
+	<b name="Add MC" action="add_mc.php">Add MC</b>
+</body>
+</html>

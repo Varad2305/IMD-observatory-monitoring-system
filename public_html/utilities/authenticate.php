@@ -1,8 +1,7 @@
 <?php
 	function authenticate($username,$pwd){
-		echo "Im here\n";
 		require_once('db_connection.php');
-		$query = "SELECT username,password,salt from users where username = '$username';";
+		$query = "SELECT username,password,salt,status from users where username = '$username';";
 		if($result = getResult($query)){
 			if(mysqli_num_rows($result) == 1){
 				$row = mysqli_fetch_array($result);
@@ -11,25 +10,28 @@
 				if($row['password'] == $pwd){
 					//correct password
 					session_start();
-					$_SESSION['firstname'] = $row['firstname'];
+					//$_SESSION['firstname'] = $row['firstname'];
 					$_SESSION['username'] = $username;
-					header("Location: test.php");
+					if($row['status'] == 0){
+						header("Location: admin.html");
+					}
+
 					exit();
 				}
 				else{
 					//wrong password
-					header("Location: index.html?error=incorrect");
+					header("Location: index.php?error=incorrect");
 					exit();
 				}
 			}
 			else{
 				//user not registered
-				header("Location: index.html?error=notexists");
+				header("Location: index.php?error=notexists");
 				exit();
 			}
 		}
 		else{
-			header("Location: index.html?error=yes");
+			header("Location: index.php?error=yes");
 			exit();
 		}
 	}

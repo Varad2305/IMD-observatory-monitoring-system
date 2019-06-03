@@ -11,7 +11,7 @@ CREATE TABLE users(
 	username varchar(255) NOT NULL,
 	password varchar(255) NOT NULL,
 	salt varchar(255) NOT NULL,
-	status int,
+	status int NOT NULL,
 	PRIMARY KEY(username)
 );
 

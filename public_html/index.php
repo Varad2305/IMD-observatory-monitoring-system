@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+    session_destroy();
+    unset($_SESSION["username"]);
+?>
 <html>
 <head>
     <title>IMD</title>

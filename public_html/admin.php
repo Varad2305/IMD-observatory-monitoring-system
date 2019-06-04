@@ -29,6 +29,19 @@ if(!$set){
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
 
 </head>
 
@@ -111,9 +124,36 @@ if(!$set){
                 </div>
             </nav>
 
-            <nav class="">
+            <div class="card">
+                <div class="container">
+                    <h4><b>Total Reports:</b></h4>
+                </div>
+            </div>
             <h2>Welcome Scientist <?php if($_SESSION["status"] == 1) echo 'F'; else echo 'E';?></h2><br></br>
-            <h5>You have reports from:</h5>
+            <h5>You have reports from:</h5> 
+            <table>
+                <tr>
+                    <th>MC</th>
+                    <th>Date</th>
+                    <th><a href="#" target="_blank">Report</a></th>
+                </tr>
+                <tr>
+                    <th>Guwahati</th>
+                    <th>21-03-19</th>
+                    <th><a href="#" target="_blank">Report</a></th>
+                </tr>
+                <tr>
+                    <th>Pune</th>
+                    <th>22-03-19</th>
+                    <th><a href="#" target="_blank">Report</a></th>
+                </tr>
+                <tr>
+                    <th>Delhi</th>
+                    <th>12-03-19</th>
+                    <th><a href="#" target="_blank">Report</a></th>
+                </tr>
+            </table>
+
         </div>
     </div>
 

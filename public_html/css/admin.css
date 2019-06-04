@@ -23,7 +23,12 @@ a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
-
+.bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
 .navbar {
     padding: 15px 10px;
     background: #fff;

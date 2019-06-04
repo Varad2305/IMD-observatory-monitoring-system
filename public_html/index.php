@@ -8,6 +8,14 @@
     <title>IMD</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="css/index.css" type="text.css">
+    <style>
+        .bottomright {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+            font-size: 18px;
+        }
+    </style>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
@@ -68,5 +76,6 @@
             </div>
         </div>
     </div>
+    <div class="bottomright">Website by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a></div>
 </body>
 </html>

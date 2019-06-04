@@ -15,6 +15,9 @@
 					if($row['status'] == 0){
 						header("Location: admin.php");
 					}
+					if($row['status'] == 1){
+						header("Location: station.php");
+					}
 					exit();
 				}
 				else{

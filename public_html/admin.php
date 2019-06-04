@@ -87,6 +87,9 @@ if(!$set){
                            </li>
                     </ul>
                 </li>
+                 <li>
+                    <a href="add_MC.php">Add MC</a>
+                </li>
             </ul>
         </nav>
 

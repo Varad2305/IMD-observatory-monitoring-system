@@ -7,15 +7,14 @@
 				$row = mysqli_fetch_array($result);
 				//$salt = $row['salt'];
 				//$hashed_pwd = hash('sha512', $key + $salt);
-				if($row['password'] == $pwd){
+				if($row["password"] == $pwd){
 					//correct password
 					session_start();
-					//$_SESSION['firstname'] = $row['firstname'];
-					$_SESSION['username'] = $username;
+					$_SESSION["username"] = $username;
+					$_SESSION["status"] = $row["status"];
 					if($row['status'] == 0){
 						header("Location: admin.html");
 					}
-
 					exit();
 				}
 				else{

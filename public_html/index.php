@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php 
     session_destroy();
-    unset($_SESSION["username"]);
+    unset($_SESSION['username']);
 ?>
 <html>
 <head>

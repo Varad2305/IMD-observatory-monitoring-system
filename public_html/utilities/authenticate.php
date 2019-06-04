@@ -13,7 +13,7 @@
 					$_SESSION["username"] = $username;
 					$_SESSION["status"] = $row["status"];
 					if($row['status'] == 0){
-						header("Location: admin.html");
+						header("Location: admin.php");
 					}
 					exit();
 				}

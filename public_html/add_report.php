@@ -26,6 +26,7 @@ if(!$set){
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
@@ -113,7 +114,7 @@ if(!$set){
 							</tbody>
 						</table>
 					</div>
-					
+						
 					<div class="wrap-table100-nextcols js-pscroll">
 						<div class="table100-nextcols">
 							<table>
@@ -126,9 +127,28 @@ if(!$set){
 								</thead>
 								<tbody>
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
+											</td>
+											<td class="cell100 column3">
+												<center><input type="radio" name="working" value="0"></center>
+											</td>
+											<td class="cell100 column4">
+												<center><input type="radio" name="working" value="-1"></center>
+											</td>
+										</form>
+									</tr>
+									<?php
+										require_once('./utilities/db_connection.php');
+										$query = "INSERT INTO report VALUES(CURDATE(),'".$_SESSION["username"]."','Wind Wane','".$_REQUEST["working"]."');";
+										$check = getResult($query);
+									?>
+
+									<tr class="row100 body">
+										<form method="post">
+											<td class="cell100 column2">
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -140,9 +160,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -154,9 +174,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -168,9 +188,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -182,9 +202,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -196,9 +216,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -210,9 +230,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -224,9 +244,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -238,9 +258,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -252,9 +272,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -266,9 +286,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -280,9 +300,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -294,9 +314,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -308,9 +328,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -322,9 +342,9 @@ if(!$set){
 									</tr>
 
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -335,10 +355,11 @@ if(!$set){
 										</form>
 									</tr>
 
+
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -349,10 +370,11 @@ if(!$set){
 										</form>
 									</tr>
 
+
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -363,10 +385,11 @@ if(!$set){
 										</form>
 									</tr>
 
+
 									<tr class="row100 body">
-										<form>
+										<form method="post">
 											<td class="cell100 column2">
-												<center><input type="radio" name="working" align="centre" value="1"></center>
+												<center><input type="radio" name="working" value="1"></center>
 											</td>
 											<td class="cell100 column3">
 												<center><input type="radio" name="working" value="0"></center>
@@ -375,6 +398,22 @@ if(!$set){
 												<center><input type="radio" name="working" value="-1"></center>
 											</td>
 										</form>
+									</tr>
+									<tr class="row100 body">
+										<form method="post">
+											<td class="cell100 column1">WindWane</td>
+											<td class="cell100 column2">
+												<center><input type="radio" name="working" value="1"></center>
+											</td>
+											<td class="cell100 column3">
+												<center><input type="radio" name="working" value="0"></center>
+											</td>
+											<td class="cell100 column4">
+												<center><input type="radio" name="working" value="-1"></center>
+											</td>
+
+										</form>
+
 									</tr>
 								</tbody>
 							</table>

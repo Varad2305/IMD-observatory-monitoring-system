@@ -13,9 +13,14 @@ CREATE TABLE users(
 	salt varchar(255) NOT NULL,
 	status int NOT NULL,
 	PRIMARY KEY(username)
+	FOREIGN KEY(username) references mc(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
-CREATE TABLE instruments(
-	name varchar(255) NOT NULL
+CREATE TABLE report(
+	date_recorded date NOT NULL,
+	observatory varchar(255) NOT NULL,
+	instrument varchar(255) NOT NULl,
+	working int(1) NOT NULL,
+	PRIMARY KEY(date_recorded,observatory,instrument)
 );

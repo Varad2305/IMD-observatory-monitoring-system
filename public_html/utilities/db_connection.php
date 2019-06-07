@@ -1,6 +1,5 @@
 <?php
 	function getResult($query){
-		echo "Here now\n";
 		//$config = parse_ini_file('../../private/db/config.ini');
 		//$link = mysqli_connect($config['servername'], $config['username'], $config['password'], $config['dbname']);
 		$link = mysqli_connect("localhost", "root", "", "imd");

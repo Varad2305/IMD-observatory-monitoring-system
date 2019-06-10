@@ -21,25 +21,6 @@ if(!$set){
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<?php
-// define variables and set to empty values
-	$gender = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["gender"])) {
-    $genderErr = "Gender is required";
-  } else {
-    $gender = test_input($_POST["gender"]);
-  }
-}
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?>
 
 <div class="table-responsive">
 	<table class="table">
@@ -150,6 +131,14 @@ function test_input($data) {
 					<td><input type="radio" name="16" value=-1></td>
 			</tr>
 			<input type="submit" name="submit" value="Submit">
+			<?php
+				echo "Your input";
+				echo $_POST["1"];
+				echo $_POST["2"];
+				include('./utilities/db_connection.php');
+				$query = "INSERT INTO report(date_recorded,observatory,instrument,working) values(CURDATE(),'".$_SESSION["username"]."','Wind Wane','".$_POST["1"]."'),(CURDATE(),'".$_SESSION["username"]."','Cup Counter Anemometer','".$_POST["2"]."');";
+				$c = getResult($query);
+			?>
 		</tbody>
 	</table>
 

@@ -119,6 +119,8 @@ if(!$set){
                 $query = "SELECT * FROM report where working = -1;";
                 $result = getResult($query);
                 $total_not_available = mysqli_num_rows($result);
+                mysqli_free_result($result);
+
             ?>
             <div id="piechart"></div>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -126,11 +128,25 @@ if(!$set){
             <script type="text/javascript">
                 // Load google charts
                 google.charts.load('current', {'packages':['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
+                google.charts.setOnLoadCallback(all_instruments);
 
                 // Draw the chart and set the chart values
                 
-                function drawChart() {
+                function all_instruments() {
+                    var total_working = <?php echo $total_working; ?>;
+                    var total_not_working = <?php echo $total_not_working; ?>;
+                    var total_not_available = <?php echo $total_not_available; ?>;
+                    var data = google.visualization.arrayToDataTable([
+                        ['Status', 'Number'],
+                        ['Working', total_working],
+                        ['Not Working', total_not_working],
+                        ['Not Available', total_not_available]
+                    ]);
+                    var options = {'title':'All Instruments', 'width':550, 'height':400};
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+                function all_windwanes() {
                     var total_working = <?php echo $total_working; ?>;
                     var total_not_working = <?php echo $total_not_working; ?>;
                     var total_not_available = <?php echo $total_not_available; ?>;

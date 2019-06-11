@@ -9,12 +9,16 @@ if(!$set){
 	exit();
 }
 ?>
+<?php
+		$obs = trim($_GET["obs"],"'");
+		$date = trim($_GET["date"],"'");
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Report</title>
+<title><?php echo $obs;?> Report</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,10 +44,6 @@ if(!$set){
 </style>
 </head>
 <body>
-	<?php
-		$obs = trim($_GET["obs"],"'");
-		$date = trim($_GET["date"],"'");
-	?>
 	<br>
 	<div class="container">
 		<div class="card bg-info text-white">

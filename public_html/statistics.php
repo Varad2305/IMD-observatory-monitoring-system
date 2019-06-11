@@ -17,7 +17,7 @@ if(!$set){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>IMD | Admin</title>
+    <title>IMD | Statistics</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -106,28 +106,46 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <h2>Welcome Admin</h2><br></br>
-            <h5>You have unreviewed reports from:</h5> 
-            <table>
-                <tr>
-                    <th>Observatory</th>
-                    <th>Date</th>
-                    <th>Report</th>
-                </tr>
-                <?php
-                    include('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
-                    $res = getResult($query);
-                ?>
-                <?php while($row1 = mysqli_fetch_array($res)):;?>
-                    <tr>
-                        <td><?php echo $row1[1];?></td>
-                        <td><?php echo $row1[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'>Report</a>"?></td>
-                    </tr>
-                <?php endwhile;?>
-            </table>
+            <?php
+                include('./utilities/db_connection.php');
+                $query = "SELECT * FROM report WHERE working = 1;";
+                $result = getResult($query);
+                $total_working = mysqli_num_rows($result);
+                mysqli_free_result($result);
+                $query = "SELECT * FROM report where working = 0;";
+                $result = getResult($query);
+                $total_not_working = mysqli_num_rows($result);
+                mysqli_free_result($result);
+                $query = "SELECT * FROM report where working = -1;";
+                $result = getResult($query);
+                $total_not_available = mysqli_num_rows($result);
+            ?>
+            <div id="piechart"></div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+            <script type="text/javascript">
+                // Load google charts
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                // Draw the chart and set the chart values
+                
+                function drawChart() {
+                    var total_working = <?php echo $total_working; ?>;
+                    var total_not_working = <?php echo $total_not_working; ?>;
+                    var total_not_available = <?php echo $total_not_available; ?>;
+                    var data = google.visualization.arrayToDataTable([
+                        ['Status', 'Number'],
+                        ['Working', total_working],
+                        ['Not Working', total_not_working],
+                        ['Not Available', total_not_available]
+                    ]);
+                    var options = {'title':'All Instruments', 'width':550, 'height':400};
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            </script>
+    
         </div>
     </div>
 
@@ -156,3 +174,4 @@ if(!$set){
 </body>
 
 </html>
+

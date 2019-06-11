@@ -120,7 +120,7 @@ if(!$set){
                     <tr>
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'>Report</a>"?></td>
+   					    <td><a href= <?php echo "report.php?obs='".$row1[1]."'&date='".$row1[0]."'"?> target="_blank">Report</a></td>
                     </tr>
                 <?php endwhile;?>
             </table>

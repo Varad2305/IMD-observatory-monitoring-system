@@ -55,7 +55,7 @@ if(!$set){
             </div>
 
             <ul class="list-unstyled components">
-                <p>Scientist <?php if($_SESSION["status"] == 1) echo 'F'; else echo 'E';?></p>
+                <p>Admin</p>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -71,7 +71,7 @@ if(!$set){
                     </ul>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="all_reports.php">All Reports</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
@@ -114,7 +114,7 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <h2>Welcome Scientist <?php echo $_SESSION["username"];?></h2><br></br>
+            <h2>Welcome Admin</h2><br></br>
             <h5>You have unreviewed reports from:</h5> 
             <table>
                 <tr>
@@ -131,7 +131,7 @@ if(!$set){
                     <tr>
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[0];?></td>
-                        <td>Report</td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'>Report</a>"?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

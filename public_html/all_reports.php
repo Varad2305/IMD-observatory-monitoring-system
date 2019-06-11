@@ -11,12 +11,13 @@ if(!$set){
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>IMD | Station</title>
+    <title>IMD | Admin</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -43,6 +44,7 @@ if(!$set){
     </style>
 
 </head>
+
 <body>
 
     <div class="wrapper">
@@ -53,23 +55,12 @@ if(!$set){
             </div>
 
             <ul class="list-unstyled components">
-                <p>Station <?php echo $_SESSION["username"];?></p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
+                <p>Admin</p>
+                <li>
+                    <a href="admin.php">Home</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="all_reports.php">All Reports</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
@@ -86,7 +77,7 @@ if(!$set){
                     </ul>
                 </li>
                  <li>
-                    <a href="add_report.php">Add Report</a>
+                    <a href="add_MC.php">Add MC</a>
                 </li>
             </ul>
         </nav>
@@ -112,6 +103,28 @@ if(!$set){
                     </button>
                 </div>
             </nav>
+            <h2>All Reports</h2><br></br>
+            <h5>You have unreviewed reports from:</h5> 
+            <table>
+                <tr>
+                    <th>Observatory</th>
+                    <th>Date</th>
+                    <th>Report</th>
+                </tr>
+                <?php
+                    include('./utilities/db_connection.php');
+                    $query = "SELECT DISTINCT date_recorded,observatory FROM report";
+                    $res = getResult($query);
+                ?>
+                <?php while($row1 = mysqli_fetch_array($res)):;?>
+                    <tr>
+                        <td><?php echo $row1[1];?></td>
+                        <td><?php echo $row1[0];?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'>Report</a>"?></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+
         </div>
     </div>
 
@@ -138,4 +151,5 @@ if(!$set){
         });
     </script>
 </body>
+
 </html>

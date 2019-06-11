@@ -54,11 +54,7 @@ if(!$set){
             <ul class="list-unstyled components">
                 <p>Station 
                 <?php 
-                    require_once('./utilities/db_connection.php');
-                    $query = "SELECT "
-
-                
-
+                    echo $_SESSION["username"]; 
                 ?>
                 </p>
                 <li class="active">

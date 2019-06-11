@@ -29,8 +29,17 @@ if(!$set){
 </style>
 </head>
 <body>
-
-
+	<br>
+	<div class="container">
+		<div class="card bg-info text-white">
+			<div class="card-body">
+				1.Date and time are filled in by the system itself.<br>
+				2.Fill all the rows to submit the report successfully.<br>
+				3.You can submit only one report a day.<br>
+			</div>
+		</div>
+	</div>
+	<br>
 	<table class="table table-dark">
 		<thead>
 			<tr>
@@ -138,17 +147,27 @@ if(!$set){
 					<td><input type="radio" name="16" value=0></td>
 					<td><input type="radio" name="16" value=-1></td>
 			</tr>
-			<tr><td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td></tr>
+			<tr>
+				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
+				<td></td>
+				<td></td>
+				<td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td>
+			</tr>
+			</form>
 			<?php
+			if($_SERVER["REQUEST_METHOD"] == 'POST'){
 				include('./utilities/db_connection.php');
-				$query = "INSERT INTO report(date_recorded,observatory,instrument,working) values(CURDATE(),'".$_SESSION["username"]."','Wind Wane','".$_POST["1"]."'),(CURDATE(),'".$_SESSION["username"]."','Cup Counter Anemometer','".$_POST["2"]."'),(CURDATE(),'".$_SESSION["username"]."','Max Thermometer','".$_POST["3"]."'),(CURDATE(),'".$_SESSION["username"]."','Min Thermometer','".$_POST["4"]."'),(CURDATE(),'".$_SESSION["username"]."','Dry Bulb Thermometer','".$_POST["5"]."'),(CURDATE(),'".$_SESSION["username"]."','Wet Bulb Thermometer','".$_POST["6"]."'),(CURDATE(),'".$_SESSION["username"]."','Stevenson Screen (single)','".$_POST["7"]."'),(CURDATE(),'".$_SESSION["username"]."','Stevenson Screen (double)','".$_POST["8"]."'),(CURDATE(),'".$_SESSION["username"]."','Thermograph','".$_POST["9"]."'),(CURDATE(),'".$_SESSION["username"]."','Barograph','".$_POST["10"]."'),(CURDATE(),'".$_SESSION["username"]."','Hydrograph','".$_POST["11"]."'),(CURDATE(),'".$_SESSION["username"]."','Ordinary Rain Gauge','".$_POST["12"]."'),(CURDATE(),'".$_SESSION["username"]."','Self Recording Rain Gauge','".$_POST["13"]."'),(CURDATE(),'".$_SESSION["username"]."','Evaporimeter','".$_POST["14"]."'),(CURDATE(),'".$_SESSION["username"]."','Mercury Barometer','".$_POST["15"]."'),(CURDATE(),'".$_SESSION["username"]."','High Wind Speed Recorder','".$_POST["16"]."');";
+				$query = "INSERT INTO report(date_recorded,observatory,instrument,working,reviewed) values(CURDATE(),'".$_SESSION["username"]."','Wind Wane','".$_POST["1"]."',0),(CURDATE(),'".$_SESSION["username"]."','Cup Counter Anemometer','".$_POST["2"]."',0),(CURDATE(),'".$_SESSION["username"]."','Max Thermometer','".$_POST["3"]."',0),(CURDATE(),'".$_SESSION["username"]."','Min Thermometer','".$_POST["4"]."',0),(CURDATE(),'".$_SESSION["username"]."','Dry Bulb Thermometer','".$_POST["5"]."',0),(CURDATE(),'".$_SESSION["username"]."','Wet Bulb Thermometer','".$_POST["6"]."',0),(CURDATE(),'".$_SESSION["username"]."','Stevenson Screen (single)','".$_POST["7"]."',0),(CURDATE(),'".$_SESSION["username"]."','Stevenson Screen (double)','".$_POST["8"]."',0),(CURDATE(),'".$_SESSION["username"]."','Thermograph','".$_POST["9"]."',0),(CURDATE(),'".$_SESSION["username"]."','Barograph','".$_POST["10"]."',0),(CURDATE(),'".$_SESSION["username"]."','Hydrograph','".$_POST["11"]."',0),(CURDATE(),'".$_SESSION["username"]."','Ordinary Rain Gauge','".$_POST["12"]."',0),(CURDATE(),'".$_SESSION["username"]."','Self Recording Rain Gauge','".$_POST["13"]."',0),(CURDATE(),'".$_SESSION["username"]."','Evaporimeter','".$_POST["14"]."',0),(CURDATE(),'".$_SESSION["username"]."','Mercury Barometer','".$_POST["15"]."',0),(CURDATE(),'".$_SESSION["username"]."','High Wind Speed Recorder','".$_POST["16"]."',0);"; 
 				$c = getResult($query);
-				header("Location:station.php");
+				if($c === FALSE){
+					echo "<script type='text/javascript'> alert('Error'); </script>";
+				}
+				else{
+					echo "<script type='text/javascript'> alert('Success'); </script>";
+				}
+			}
 			?>
 		</tbody>
 	</table>
-
-
-
 </body>
 </html>

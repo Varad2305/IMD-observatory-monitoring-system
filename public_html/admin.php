@@ -114,29 +114,26 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <h2>Welcome Scientist <?php if($_SESSION["status"] == 1) echo 'F'; else echo 'E';?></h2><br></br>
-            <h5>You have reports from:</h5> 
+            <h2>Welcome Scientist <?php echo $_SESSION["username"];?></h2><br></br>
+            <h5>You have unreviewed reports from:</h5> 
             <table>
                 <tr>
-                    <th>MC</th>
+                    <th>Observatory</th>
                     <th>Date</th>
-                    <th><a href="#" target="_blank">Report</a></th>
+                    <th>Report</th>
                 </tr>
-                <tr>
-                    <th>Guwahati</th>
-                    <th>21-03-19</th>
-                    <th><a href="#" target="_blank">Report</a></th>
-                </tr>
-                <tr>
-                    <th>Pune</th>
-                    <th>22-03-19</th>
-                    <th><a href="#" target="_blank">Report</a></th>
-                </tr>
-                <tr>
-                    <th>Delhi</th>
-                    <th>12-03-19</th>
-                    <th><a href="#" target="_blank">Report</a></th>
-                </tr>
+                <?php
+                    include('./utilities/db_connection.php');
+                    $query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
+                    $res = getResult($query);
+                ?>
+                <?php while($row1 = mysqli_fetch_array($res)):;?>
+                    <tr>
+                        <td><?php echo $row1[1];?></td>
+                        <td><?php echo $row1[0];?></td>
+                        <td>Report</td>
+                    </tr>
+                <?php endwhile;?>
             </table>
 
         </div>

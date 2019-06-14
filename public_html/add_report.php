@@ -168,7 +168,7 @@ if(!$set){
 				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
 				<td></td>
 				<td></td>
-				<td><button class="btn btn-primary" onclick="add_instr()">Add Instrument</button></td>
+				<td><button class="btn btn-primary" type="button" onclick="add_instr()">Add Instrument</button></td>
 				<td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td>
 			</tr>
 			</form>
@@ -241,15 +241,21 @@ if(!$set){
 		</tbody>
 	</table>
 	<script type="text/javascript">
-		function add_instr(){
-			var table = document.getElementById("myTable");
-  			var row = table.insertRow(0);
- 			var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			cell1.innerHTML = "<input type='text' name= 'test'>";
-		 	cell2.innerHTML = "NEW CELL2";
-		}
+	function add_instr(){
+		var table = document.getElementById("myTable");
+  		var row = table.insertRow(17);
+		var cell1 = row.insertCell(0)
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+		var cell4 = row.insertCell(3);
+		var cell5 = row.insertCell(4);
+		cell1.innerHTML = "<input type='text' name='addedt'>";
+		cell2.innerHTML = "<input type='radio' name='addedr'>";
+		cell3.innerHTML = "<input type='radio' name='addedr'>";
+		cell4.innerHTML = "<input type='radio' name='addedr'>";
+		cell5.innerHTML = "<input type='text' name='addedremark'>";
+	}
 
-	</script>
+</script>
 </body>
 </html>

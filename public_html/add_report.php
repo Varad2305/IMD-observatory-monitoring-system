@@ -40,7 +40,7 @@ if(!$set){
 		</div>
 	</div>
 	<br>
-	<table class="table table-dark">
+	<table class="table table-dark" id="myTable">
 		<thead>
 			<tr>
 				<th>INSTRUMENT</th>
@@ -168,14 +168,14 @@ if(!$set){
 				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td><button class="btn btn-primary" onclick="add_instr()">Add Instrument</button></td>
 				<td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td>
 			</tr>
 			</form>
 			<?php
 			if($_SERVER["REQUEST_METHOD"] == 'POST'){
 				include('./utilities/db_connection.php');
-				$flag = 1;
+				$flag1 = 1;
 				function inject($instrument_name,$instrument_number){
 					$instrument = $instrument_name;
 					$working = $_POST[$instrument_number];
@@ -184,29 +184,46 @@ if(!$set){
 					$query = "INSERT INTO report(date_recorded,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
-						$flag = 0;
+						$GLOBALS["flag1"] = 0;
 					}
 				}
-				inject("Wind_Wane","1");
-				inject("Cup_Counter_Anemometer","2");
-				inject("Max_Thermometer","3");
-				inject("Min_Thermometer","4");
-				inject("Dry_Bulb_Thermometer","5");
-				inject("Wet_Bulb_Thermometer","6");
-				inject("Stevenson_Screen_(Single)","7");
-				inject("Stevenson_Screen_(Double)","8");
-				inject("Thermograph","9");
-				inject("Barograph","10");
-				inject("Hydrograph","11");
-				inject("Ordinary_Rain_Gauge","12");
-				inject("Self_Recording_Rain_Gauge","13");
-				inject("Evaporimeter","14");
-				inject("Mercury_Barometer","15");
-				inject("High_Wind_Speed_Recorder","16");
-				if($flag === 0)
-					echo "<script type='text/javascript'> alert('Error'); </script>";
+				function all_set(){
+					$flag = 1;
+					for ($i=1; $i<=16; $i++){ 
+						$j = strval($i);
+						if(!isset($_POST[$j])){
+							$flag = 0;
+							break;
+						}
+					}
+					return $flag;
+				}
+				if(all_set()){
+					inject("Wind_Wane","1");
+					inject("Cup_Counter_Anemometer","2");
+					inject("Max_Thermometer","3");
+					inject("Min_Thermometer","4");
+					inject("Dry_Bulb_Thermometer","5");
+					inject("Wet_Bulb_Thermometer","6");
+					inject("Stevenson_Screen_(Single)","7");
+					inject("Stevenson_Screen_(Double)","8");
+					inject("Thermograph","9");
+					inject("Barograph","10");
+					inject("Hydrograph","11");
+					inject("Ordinary_Rain_Gauge","12");
+					inject("Self_Recording_Rain_Gauge","13");
+					inject("Evaporimeter","14");
+					inject("Mercury_Barometer","15");
+					inject("High_Wind_Speed_Recorder","16");
+					if($flag1 == 0){
+						echo "<script type='text/javascript'> alert('You have already filled a report today'); </script>";		
+					}
+					else{
+						echo "<script type='text/javascript'> alert('Success'); </script>";
+					}
+				}
 				else{
-					echo "<script type='text/javascript'> alert('Success'); </script>";
+					echo "<script type='text/javascript'> alert('Please fill all rows'); </script>";	
 				}
 
 
@@ -223,5 +240,16 @@ if(!$set){
 			?>
 		</tbody>
 	</table>
+	<script type="text/javascript">
+		function add_instr(){
+			var table = document.getElementById("myTable");
+  			var row = table.insertRow(0);
+ 			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			cell1.innerHTML = "<input type='text' name= 'test'>";
+		 	cell2.innerHTML = "NEW CELL2";
+		}
+
+	</script>
 </body>
 </html>

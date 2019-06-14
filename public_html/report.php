@@ -66,10 +66,11 @@ if(!$set){
 		<tr style="background-color: #141414">
 			<center><th><font color= #f5f0f0>Instrument</font></th></center>
 			<center><th><font color= #f5f0f0>Status</font></th></center>
+			<center><th><font color= #f5f0f0>Remark</font></th></center>
 		</tr>
 		<?php
 			include('./utilities/db_connection.php');
-			$query = "SELECT instrument,working FROM report where observatory = '$obs' AND date_recorded = '$date';";
+			$query = "SELECT instrument,working,remark FROM report where observatory = '$obs' AND date_recorded = '$date';";
 			$res = getResult($query);
 			$status_colors = array(0 => '#ff0000',1 => '#00ff00',-1 => '#d3d3d3' );
 		?>
@@ -92,6 +93,7 @@ if(!$set){
                     			echo "Error";
                     	}
                     ?></td>
+                    <td><?php echo $row1[2]; ?></td>
                 </tr>
         <?php endwhile;?>
         <?php

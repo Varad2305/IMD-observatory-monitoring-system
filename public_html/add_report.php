@@ -57,112 +57,112 @@ if(!$set){
 					<td><input type="radio" name="1" value=1></td>
 					<td><input type="radio" name="1" value=0></td>
 					<td><input type="radio" name="1" value=-1></td>
-					<td><input type="text" name="windwane"></td>
+					<td><input type="text" name="Wind_Wane"></td>
 			</tr>
 			<tr>
 					<td>Cup Counter Anemometer</td>
 					<td><input type="radio" name="2" value=1></td>
 					<td><input type="radio" name="2" value=0></td>
 					<td><input type="radio" name="2" value=-1></td>
-					<td><input type="text" name="CCA"></td>
+					<td><input type="text" name="Cup_Counter_Anemometer"></td>
 			</tr>
 			<tr>
 					<td>Max Thermometer</td>
 					<td><input type="radio" name="3" value=1></td>
 					<td><input type="radio" name="3" value=0></td>
 					<td><input type="radio" name="3" value=-1></td>
-					<td><input type="text" name="max_therm"></td>
+					<td><input type="text" name="Max_Thermometer"></td>
 			</tr>
 			<tr>
 					<td>Min Thermometer</td>
 					<td><input type="radio" name="4" value=1></td>
 					<td><input type="radio" name="4" value=0></td>
 					<td><input type="radio" name="4" value=-1></td>
-					<td><input type="text" name="min_therm"></td>
+					<td><input type="text" name="Min_Thermometer"></td>
 			</tr>
 			<tr>
 					<td>Dry Bulb Thermometer</td>
 					<td><input type="radio" name="5" value=1></td>
 					<td><input type="radio" name="5" value=0></td>
 					<td><input type="radio" name="5" value=-1></td>
-					<td><input type="text" name="DBT"></td>
+					<td><input type="text" name="Dry_Bulb_Thermometer"></td>
 			</tr>
 			<tr>
 					<td>Wet Bulb Thermometer</td>
 					<td><input type="radio" name="6" value=1></td>
 					<td><input type="radio" name="6" value=0></td>
 					<td><input type="radio" name="6" value=-1></td>
-					<td><input type="text" name="WBT"></td>
+					<td><input type="text" name="Wet_Bulb_Thermometer"></td>
 			</tr>
 			<tr>
 					<td>Stevenson Screen (single)</td>
 					<td><input type="radio" name="7" value=1></td>
 					<td><input type="radio" name="7" value=0></td>
 					<td><input type="radio" name="7" value=-1></td>
-					<td><input type="text" name="SSS"></td>
+					<td><input type="text" name="Stevenson_Screen_(Single)"></td>
 			</tr>
 			<tr>
 					<td>Stevenson Screen (double)</td>
 					<td><input type="radio" name="8" value=1></td>
 					<td><input type="radio" name="8" value=0></td>
 					<td><input type="radio" name="8" value=-1></td>
-					<td><input type="text" name="SSD"></td>
+					<td><input type="text" name="Stevenson_Screen_(Double)"></td>
 			</tr>
 			<tr>
 					<td>Thermograph</td>
 					<td><input type="radio" name="9" value=1></td>
 					<td><input type="radio" name="9" value=0></td>
 					<td><input type="radio" name="9" value=-1></td>
-					<td><input type="text" name="thermograph"></td>
+					<td><input type="text" name="Thermograph"></td>
 			</tr>
 			<tr>
 					<td>Barograph</td>
 					<td><input type="radio" name="10" value=1></td>
 					<td><input type="radio" name="10" value=0></td>
 					<td><input type="radio" name="10" value=-1></td>
-					<td><input type="text" name="barograph"></td>
+					<td><input type="text" name="Barograph"></td>
 			</tr>
 			<tr>
 					<td>Hydrograph</td>
 					<td><input type="radio" name="11" value=1></td>
 					<td><input type="radio" name="11" value=0></td>
 					<td><input type="radio" name="11" value=-1></td>
-					<td><input type="text" name="hydrograph"></td>
+					<td><input type="text" name="Hydrograph"></td>
 			</tr>
 			<tr>
 					<td>Ordinary Rain Gauge</td>
 					<td><input type="radio" name="12" value=1></td>
 					<td><input type="radio" name="12" value=0></td>
 					<td><input type="radio" name="12" value=-1></td>
-					<td><input type="text" name="ORG"></td>
+					<td><input type="text" name="Ordinary_Rain_Gauge"></td>
 			</tr>
 			<tr>
 					<td>Self Recording Rain Gauge</td>
 					<td><input type="radio" name="13" value=1></td>
 					<td><input type="radio" name="13" value=0></td>
 					<td><input type="radio" name="13" value=-1></td>
-					<td><input type="text" name="SRRG"></td>
+					<td><input type="text" name="Self_Recording_Rain_Gauge"></td>
 			</tr>
 			<tr>
 					<td>Evaporimeter</td>
 					<td><input type="radio" name="14" value=1></td>
 					<td><input type="radio" name="14" value=0></td>
 					<td><input type="radio" name="14" value=-1></td>
-					<td><input type="text" name="evaporimeter"></td>
+					<td><input type="text" name="Evaporimeter"></td>
 			</tr>
 			<tr>
 					<td>Mercury Barometer</td>
 					<td><input type="radio" name="15" value=1></td>
 					<td><input type="radio" name="15" value=0></td>
 					<td><input type="radio" name="15" value=-1></td>
-					<td><input type="text" name="MB"></td>
+					<td><input type="text" name="Mercury_Barometer"></td>
 			</tr>
 			<tr>
 					<td>High Wind Speed Recorder</td>
 					<td><input type="radio" name="16" value=1></td>
 					<td><input type="radio" name="16" value=0></td>
 					<td><input type="radio" name="16" value=-1></td>
-					<td><input type="text" name="HWSR"></td>
+					<td><input type="text" name="High_Wind_Speed_Recorder"></td>
 			</tr>
 			<tr>
 				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
@@ -187,22 +187,22 @@ if(!$set){
 						$flag = 0;
 					}
 				}
-				inject("windwane","1");
-				inject("CCA","2");
-				inject("max_therm","3");
-				inject("min_therm","4");
-				inject("DBT","5");
-				inject("WBT","6");
-				inject("SSS","7");
-				inject("SSD","8");
-				inject("thermograph","9");
-				inject("barograph","10");
-				inject("hydrograph","11");
-				inject("ORG","12");
-				inject("SRRG","13");
-				inject("evaporimeter","14");
-				inject("MB","15");
-				inject("HWSR","16");
+				inject("Wind_Wane","1");
+				inject("Cup_Counter_Anemometer","2");
+				inject("Max_Thermometer","3");
+				inject("Min_Thermometer","4");
+				inject("Dry_Bulb_Thermometer","5");
+				inject("Wet_Bulb_Thermometer","6");
+				inject("Stevenson_Screen_(Single)","7");
+				inject("Stevenson_Screen_(Double)","8");
+				inject("Thermograph","9");
+				inject("Barograph","10");
+				inject("Hydrograph","11");
+				inject("Ordinary_Rain_Gauge","12");
+				inject("Self_Recording_Rain_Gauge","13");
+				inject("Evaporimeter","14");
+				inject("Mercury_Barometer","15");
+				inject("High_Wind_Speed_Recorder","16");
 				if($flag === 0)
 					echo "<script type='text/javascript'> alert('Error'); </script>";
 				else{

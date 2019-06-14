@@ -77,6 +77,6 @@
             </div>
         </div>
     </div>
-    <div class="bottomright">Website by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a></div>
+    <div class="bottomright">Website by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a></div><br>S
 </body>
 </html>

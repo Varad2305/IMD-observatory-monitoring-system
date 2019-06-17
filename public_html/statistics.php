@@ -108,14 +108,17 @@ if(!$set){
             </nav>
             <?php
                 include('./utilities/db_connection.php');
+                
                 $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working=1;";
                 $result = getResult($query);
                 $total_working = mysqli_num_rows($result);
                 mysqli_free_result($result);
+
                 $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working=0;";
                 $result = getResult($query);
                 $total_not_working = mysqli_num_rows($result);
                 mysqli_free_result($result);
+
                 $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working=-1;";
                 $result = getResult($query);
                 $total_not_available = mysqli_num_rows($result);

@@ -9,15 +9,15 @@ if(!$set){
 	exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>IMD | Admin</title>
+    <title>State Wise Stats</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -30,6 +30,15 @@ if(!$set){
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <style>
+    .dropdown-menu{
+        width:350px !important;
+        height: 40px !important;
+        background-color: rgba(0,0,0,.5);
+        font-family: "Poppins",sans-serif;
+        font-weight: 100;
+        font-size: 12px;
+        line-height: 30px;
+    }
     table {
         border-collapse: collapse;
         width: 100%;
@@ -44,10 +53,8 @@ if(!$set){
     </style>
 
 </head>
-
 <body>
-
-    <div class="wrapper">
+<div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -106,8 +113,28 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <h2>Welcome Admin</h2><br></br>
-            <h5>You have unreviewed reports from:</h5> 
+            <?php
+                include('./utilities/db_connection.php');
+                $query = "SELECT DISTINCT state from mc;";
+                $states = getResult($query);
+            ?>
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+            <select class="browser-default custom-select" name="state">
+                <option selected>State</option>
+                <?php while($row1 = mysqli_fetch_array($states)):;?>
+                    <option value="<?php echo $row1[0]; ?>"><?php echo $row1[0]; ?></option>
+                <?php endwhile;?>
+            </select>
+            <br>
+            <br>
+            <input placeholder="Start Date" class="browser-default custom-select" type="text" onfocus="(this.type='date')"  id="start_date" name="start_date">
+            <br>
+            <br>
+            <input placeholder="End Date" class="browser-default custom-select" type="text" onfocus="(this.type='date')"  id="end_date" name="end_date"><br><br>
+            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            </form>
+            <br>
+            <br>
             <table>
                 <tr>
                     <th>Observatory</th>
@@ -115,9 +142,19 @@ if(!$set){
                     <th>Report</th>
                 </tr>
                 <?php
-                    include('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
-                    $res = getResult($query);
+                    if($_SERVER["REQUEST_METHOD"] == "POST"){
+                        include('./utilities/db_connection.php');
+                        $start_date = $_POST["start_date"];
+                        $end_date = $_POST["end_date"];
+                        $state = $_POST["state"];
+                        echo $start_date;
+                        echo $end_date;
+                        echo $state;
+                        
+                        $query = "SELECT DISTINCT date_recorded,observatory from report WHERE DATE(date_recorded) BETWEEN ''$start_date'' AND ''$end_date'' AND observatory IN (SELECT name FROM mc WHERE state = ''$state'');";
+                        // SELECT date_recorded,observatory from report where date_recorded BETWEEN "2019-06-10" AND "2019-06-18" AND observatory IN (SELECT name from mc where state = 'Maharashtra')
+                        $res = getResult($query);
+                    }
                 ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
@@ -154,5 +191,4 @@ if(!$set){
         });
     </script>
 </body>
-
 </html>

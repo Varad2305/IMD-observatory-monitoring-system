@@ -40,6 +40,7 @@ if(!$set){
 		</div>
 	</div>
 	<br>
+	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<table class="table table-dark" id="myTable">
 		<thead>
 			<tr>
@@ -51,7 +52,6 @@ if(!$set){
 			</tr>
 		</thead>
 		<tbody>
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<tr>
 					<td>Wind Wane</td>
 					<td><input type="radio" name="1" value=1></td>
@@ -171,7 +171,9 @@ if(!$set){
 				<td><button class="btn btn-primary" type="button" onclick="add_instr()">Add Instrument</button></td>
 				<td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td>
 			</tr>
-			</form>
+		</tbody>
+	</table>
+	</form>
 			<?php
 			if($_SERVER["REQUEST_METHOD"] == 'POST'){
 				include('./utilities/db_connection.php');
@@ -244,7 +246,6 @@ if(!$set){
 		cell4.innerHTML = "<input type='radio' name='addedr'>";
 		cell5.innerHTML = "<input type='text' name='addedremark' placeholder='Remark..'>";
 	}
-
 </script>
 </body>
 </html>

@@ -16,6 +16,17 @@ if(!$set){
 	<link rel="stylesheet" type="text/css" href="css/add_MC.css">
 	<title>Add MC</title>
 </head>
+<style>
+  .dropdown-menu{
+    width:350px !important;
+    height: 40px !important;
+    background-color: rgba(0,0,0,.5);
+    font-family: "Poppins",sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+    line-height: 30px;
+  }
+</style>
 <body>
 	<div class="container">  
   <form id="contact" action="" method="post">
@@ -33,6 +44,20 @@ if(!$set){
       <input placeholder="Web Site" type="url" name="website" id="website" tabindex="4">
     </fieldset>
     <fieldset>
+      <div class="custom-select" style="width:200px;">
+      <!-- <input placeholder="Type" type="url" name="website" id="website" tabindex="4"> -->
+        <select name="obs_type" tabindex="4" class="dropdown-menu">
+          <option value="MO">Meteorological Observatory</option>
+          <option value="AMO">Aerodrome Met Observatory</option>
+          <option value="AMS">Aerodrome Met Station</option>
+          <option value=MWO>Meteorological Watch Office</option>
+          <option value="MC">Meteorological Centre</option>
+          <option value="RMC">Regional Meteorological Centre</option>
+          <option value="AWS">Automatic Weather Station</option>
+        </select>
+      </div>
+    </fieldset>
+    <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
   </form>
@@ -43,7 +68,7 @@ if(!$set){
     	$state = $_POST['state'];
     	$pwd = $_POST['password'];
     	$website = $_POST['website'];
-    	$query = "INSERT INTO mc(name,state) VALUES ('".$_POST["city"]."','".$_POST["state"]."');"; 
+    	$query = "INSERT INTO mc(name,state,type) VALUES ('".$_POST["city"]."','".$_POST["state"]."','".$_POST["obs_type"]."');"; 
     	$check = getResult($query);
     	$query2 = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["city"]."','".$_POST["password"]."','123',1);";
     	$check2 = getResult($query2);

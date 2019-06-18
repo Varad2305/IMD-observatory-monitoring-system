@@ -188,11 +188,9 @@ if(!$set){
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
             <script type="text/javascript">
-                // Load google charts
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(all_instruments);
 
-                // Draw the chart and set the chart values
                 
                 function all_instruments() {
                     var total_working = <?php echo $total_working; ?>;
@@ -209,6 +207,35 @@ if(!$set){
                     chart.draw(data, options);
                 }
             </script>
+            <br>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Working</th>
+                        <th>Not Working</th>
+                        <th>Not available</th>
+                    </tr>
+                </thead>
+                <?php
+                    require_once('./utilities/db_connection.php');
+                    $query = "SELECT instrument, SUM(CASE WHEN working = 1 THEN 1 ELSE 0 END) Working, SUM(CASE WHEN working = 0 THEN 1 ELSE 0 END) Not_working, SUM(CASE WHEN working = -1 THEN 1 ELSE 0 END) Not_available FROM report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name FROM mc where state = '$state') GROUP BY instrument;";
+                    $table_result = getResult($query);
+                ?>
+                <tbody>
+                    <?php while($row1 = mysqli_fetch_array($table_result)):;?>
+                        <tr>
+                            <td><?php echo $row1[0]; ?></td>
+                            <td><?php echo $row1[1]; ?></td>
+                            <td><?php echo $row1[2]; ?></td>
+                            <td><?php echo $row1[3]; ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+                
+
+            </table>
 
         </div>
     </div>

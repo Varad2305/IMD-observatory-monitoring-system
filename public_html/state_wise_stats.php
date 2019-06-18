@@ -144,23 +144,15 @@ if(!$set){
                 <?php
                     if($_SERVER["REQUEST_METHOD"] == "POST"){
                         include('./utilities/db_connection.php');
-                        $start_date = $_POST["start_date"];
-                        $end_date = $_POST["end_date"];
-                        $state = $_POST["state"];
-                        echo $start_date;
-                        echo $end_date;
-                        echo $state;
-                        
-                        $query = "SELECT DISTINCT date_recorded,observatory from report WHERE DATE(date_recorded) BETWEEN ''$start_date'' AND ''$end_date'' AND observatory IN (SELECT name FROM mc WHERE state = ''$state'');";
-                        // SELECT date_recorded,observatory from report where date_recorded BETWEEN "2019-06-10" AND "2019-06-18" AND observatory IN (SELECT name from mc where state = 'Maharashtra')
+                        $query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
                         $res = getResult($query);
                     }
                 ?>
-                <?php while($row1 = mysqli_fetch_array($res)):;?>
+                <?php while($row2 = mysqli_fetch_array($res)):;?>
                     <tr>
-                        <td><?php echo $row1[1];?></td>
-                        <td><?php echo $row1[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>"?></td>
+                        <td><?php echo $row2[1];?></td>
+                        <td><?php echo $row2[0];?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row2[1]."'&date='".$row2[0]."' target='_blank'>Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

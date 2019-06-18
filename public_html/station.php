@@ -2,17 +2,17 @@
 session_start();
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
-	unset($_SESSION["username"]);
-	unset($_SESSION["status"]);
-	header("Location: index.html?error=timed_out");
-	session_destroy();
-	exit();
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    session_destroy();
+    exit();
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -82,7 +82,7 @@ if(!$set){
                         </li>
                         <li>
                             <a href="#">Page 3</a>
-                           </li>
+                        </li>
                     </ul>
                 </li>
                  <li>
@@ -101,7 +101,7 @@ if(!$set){
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    <form action="/IMD/public_html/index.php" method="get">
+                    <form action="./index.php" method="get">
                         <button type="submit" class="btn btn-info">
                             <i class="fa fa-sign-out"></i>
                             <span>Sign out</span>
@@ -112,6 +112,29 @@ if(!$set){
                     </button>
                 </div>
             </nav>
+            <h2>Welcome <?php echo $_SESSION["username"]; ?></h2><br></br>
+            <h5>Past Reports:</h5> 
+            <table>
+                <tr>
+                    <th>Observatory</th>
+                    <th>Date</th>
+                    <th>Report</th>
+                </tr>
+                <?php
+                    include('./utilities/db_connection.php');
+                    $query = "SELECT DISTINCT date_recorded, observatory FROM report WHERE observatory = '".$_SESSION["username"]."' ";
+                    //$query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
+                    $res = getResult($query);
+                ?>
+                <?php while($row1 = mysqli_fetch_array($res)):;?>
+                    <tr>
+                        <td><?php echo $row1[1];?></td>
+                        <td><?php echo $row1[0];?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'>Report</a>"?></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+
         </div>
     </div>
 
@@ -123,6 +146,9 @@ if(!$set){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+
 
     <script type="text/javascript">
         $(document).ready(function () {

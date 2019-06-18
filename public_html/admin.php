@@ -82,6 +82,9 @@ if(!$set){
                  <li>
                     <a href="add_MC.php">Add Observatory</a>
                 </li>
+                <li>
+                    <a href="delete_MC.php">Delete Observatory</a>
+                </li>
             </ul>
         </nav>
 
@@ -123,7 +126,7 @@ if(!$set){
                     <tr>
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>"?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

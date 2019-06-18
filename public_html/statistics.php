@@ -82,6 +82,9 @@ if(!$set){
                  <li>
                     <a href="add_MC.php">Add Observatory</a>
                 </li>
+                <li>
+                    <a href="delete_MC.php">Delete Observatory</a>
+                </li>
             </ul>
         </nav>
 

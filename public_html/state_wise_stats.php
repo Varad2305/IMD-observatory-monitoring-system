@@ -113,15 +113,15 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <?php
-                include('./utilities/db_connection.php');
-                $query = "SELECT DISTINCT state from mc;";
-                $states = getResult($query);
-            ?>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
             <select class="browser-default custom-select" name="state">
+            <?php
+                require_once('./utilities/db_connection.php');
+                $states_query = "SELECT DISTINCT state FROM mc;";
+                $states_result = getResult($states_query);
+            ?>
                 <option selected>State</option>
-                <?php while($row1 = mysqli_fetch_array($states)):;?>
+                <?php while($row1 = mysqli_fetch_array($states_result)):;?>
                     <option value="<?php echo $row1[0]; ?>"><?php echo $row1[0]; ?></option>
                 <?php endwhile;?>
             </select>
@@ -142,17 +142,19 @@ if(!$set){
                     <th>Report</th>
                 </tr>
                 <?php
-                    if($_SERVER["REQUEST_METHOD"] == "POST"){
-                        include('./utilities/db_connection.php');
-                        $query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
-                        $res = getResult($query);
-                    }
+                    require_once('./utilities/db_connection.php');
+                    $start_date = $_POST["start_date"];
+                    $end_date = $_POST["end_date"];
+                    $state = $_POST["state"];
+
+                    $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
+                    $res = getResult($query);
                 ?>
-                <?php while($row2 = mysqli_fetch_array($res)):;?>
+                <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
-                        <td><?php echo $row2[1];?></td>
-                        <td><?php echo $row2[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row2[1]."'&date='".$row2[0]."' target='_blank'>Report</a>";?></td>
+                        <td><?php echo $row1[1];?></td>
+                        <td><?php echo $row1[0];?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

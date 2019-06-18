@@ -135,21 +135,26 @@ if(!$set){
             </form>
             <br>
             <br>
+            <?php
+                require_once('./utilities/db_connection.php');
+                $start_date = $_POST["start_date"];
+                $end_date = $_POST["end_date"];
+                $state = $_POST["state"];
+
+                $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
+                $res = getResult($query);
+            ?>
+            <div class="browser-default">
+                Reports in <strong><?php echo $state; ?></strong> between <strong><?php echo $start_date; ?></strong> and <strong><?php echo $end_date; ?></strong>:<br>
+            </div>
+            <br>
+            <br>
             <table>
                 <tr>
                     <th>Observatory</th>
                     <th>Date</th>
                     <th>Report</th>
                 </tr>
-                <?php
-                    require_once('./utilities/db_connection.php');
-                    $start_date = $_POST["start_date"];
-                    $end_date = $_POST["end_date"];
-                    $state = $_POST["state"];
-
-                    $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
-                    $res = getResult($query);
-                ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
                         <td><?php echo $row1[1];?></td>
@@ -158,6 +163,52 @@ if(!$set){
                     </tr>
                 <?php endwhile;?>
             </table>
+
+            <?php  
+                require_once('./utilities/db_connection.php');
+
+                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 1 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                $result = getResult($query);
+                $total_working = mysqli_num_rows($result);
+                mysqli_free_result($result);
+
+                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                $result = getResult($query);
+                $total_not_working = mysqli_num_rows($result);
+                mysqli_free_result($result);
+
+                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                $result = getResult($query);
+                $total_not_available = mysqli_num_rows($result);
+                mysqli_free_result($result);
+
+            ?>
+            <br><br>
+            <center><div id="piechart"></div></center>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script type="text/javascript">
+                // Load google charts
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(all_instruments);
+
+                // Draw the chart and set the chart values
+                
+                function all_instruments() {
+                    var total_working = <?php echo $total_working; ?>;
+                    var total_not_working = <?php echo $total_not_working; ?>;
+                    var total_not_available = <?php echo $total_not_available; ?>;
+                    var data = google.visualization.arrayToDataTable([
+                        ['Status', 'Number'],
+                        ['Working', total_working],
+                        ['Not Working', total_not_working],
+                        ['Not Available', total_not_available]
+                    ]);
+                    var options = {'title':'All Instruments in the given state and time frame', 'width':550, 'height':400};
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            </script>
 
         </div>
     </div>

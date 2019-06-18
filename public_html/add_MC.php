@@ -20,7 +20,7 @@ if(!$set){
   .dropdown-menu{
     width:350px !important;
     height: 40px !important;
-    background-color: rgba(0,0,0,.5);
+    opacity: 0.5;
     font-family: "Poppins",sans-serif;
     font-weight: 100;
     font-size: 12px;
@@ -32,7 +32,13 @@ if(!$set){
   <form id="contact" action="" method="post">
     <h3>Add a Meteorological Center</h3>
     <fieldset>
+      <input placeholder="Name" type="text" name="name" id="name" tabindex="2" required>
+    </fieldset>
+    <fieldset>
       <input placeholder="City" type="text" name="city" id="city" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="District" type="text" name="district" id="district" tabindex="2" required>
     </fieldset>
     <fieldset>
       <input placeholder="State" type="text" name="state" id="state" tabindex="2" required>
@@ -45,7 +51,6 @@ if(!$set){
     </fieldset>
     <fieldset>
       <div class="custom-select" style="width:200px;">
-      <!-- <input placeholder="Type" type="url" name="website" id="website" tabindex="4"> -->
         <select name="obs_type" tabindex="4" class="dropdown-menu">
           <option value="MO">Meteorological Observatory</option>
           <option value="AMO">Aerodrome Met Observatory</option>
@@ -68,9 +73,9 @@ if(!$set){
     	$state = $_POST['state'];
     	$pwd = $_POST['password'];
     	$website = $_POST['website'];
-    	$query = "INSERT INTO mc(name,state,type) VALUES ('".$_POST["city"]."','".$_POST["state"]."','".$_POST["obs_type"]."');"; 
+    	$query = "INSERT INTO mc(name,district,city,state,type) VALUES ('".$_POST["name"]."','".$_POST["district"]."','".$_POST["city"]."','".$_POST["state"]."','".$_POST["obs_type"]."');"; 
     	$check = getResult($query);
-    	$query2 = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["city"]."','".$_POST["password"]."','123',1);";
+    	$query2 = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["name"]."','".$_POST["password"]."','123',1);";
     	$check2 = getResult($query2);
     	if($check2 && $check){
     		header("Location:add_MC_conf.php");

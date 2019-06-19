@@ -10,12 +10,6 @@ if(!$set){
 	exit();
 }
 ?>
-
-<?php
-	$obs = trim($_GET["obs"],"'");
-	echo $obs;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,28 +29,7 @@ if(!$set){
 </head>
 <body>
 	<br>
-	<div class="container">
-		<div class="card bg-info text-white">
-			<div class="card-body">
-				1.Date and time are filled in by the system itself.<br>
-				2.Fill all the rows to submit the report successfully.<br>
-				3.You can submit only one report a day.<br>
-			</div>
-		</div>
-	</div>
-	<br>
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <center><select class="browser-default custom-select" name="obs_type" style="width:6em;"></center>
-                <option selected>Type</option>
-                <option value="RMC">RMC</option>
-                <option value="MC">MC</option>
-                <option value="MO">MO</option>
-                <option value="WMO">MWO</option>
-                <option value="AMO">AMO</option>
-                <option value="AMS">AMS</option>
-                <option value="AWS">AWS</option>
-            </select>
-            <br><br>
             <center><select class="browser-default custom-select" name="state" style="width:20em;"></center>
                 <option selected>State</option>
                 <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -100,10 +73,6 @@ if(!$set){
             <br>
             <input type="text" name="station" class="form-control" placeholder="Station" style="width:20em">
             <br><br>
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-            <br><br>
-        </form>
-
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<table class="table table-dark" id="myTable" style="width:70em">
 		<thead>
@@ -169,23 +138,21 @@ if(!$set){
 				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
 				<td></td>
 				<td></td>
-				<td><button class="btn btn-primary" type="button" onclick="add_instr()">Add Instrument</button></td>
 				<td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td>
 			</tr>
 		</tbody>
 	</table>
 	</form>
 			<?php
-			if($_SERVER["REQUEST_METHOD"] == 'POST'){
+			if($_SERVER["REQUEST_METHOD"] == "POST"){
 				include('./utilities/db_connection.php');
 				$flag1 = 1;
 				function inject($instrument_name,$instrument_number){
 					$instrument = $instrument_name;
 					$working = $_POST[$instrument_number];
 					$remark = $_POST[$instrument_name];
-					$obs1 = $GLOBALS["obs"];
-					echo "Here".$obs1;
-					$query = "INSERT INTO report(date_recorded,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'$obs1','$instrument','$working',0,'$remark');";
+					$station = $_POST["station"];
+					$query = "INSERT INTO report(date_recorded,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'$station','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
 						$GLOBALS["flag1"] = 0;
@@ -226,21 +193,6 @@ if(!$set){
 			?>
 		</tbody>
 	</table>
-	<script type="text/javascript">
-	function add_instr(){
-		var table = document.getElementById("myTable");
-  		var row = table.insertRow(8);
-		var cell1 = row.insertCell(0)
-		var cell2 = row.insertCell(1);
-		var cell3 = row.insertCell(2);
-		var cell4 = row.insertCell(3);
-		var cell5 = row.insertCell(4);
-		cell1.innerHTML = "<input type='text' name='addedt' placeholder='Instrument..'>";
-		cell2.innerHTML = "<input type='radio' name='addedr'>";
-		cell3.innerHTML = "<input type='radio' name='addedr'>";
-		cell4.innerHTML = "<input type='radio' name='addedr'>";
-		cell5.innerHTML = "<input type='text' name='addedremark' placeholder='Remark..'>";
-	}
 </script>
 </body>
 </html>

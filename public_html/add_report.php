@@ -47,76 +47,29 @@ if(!$set){
                 <option value="RMC">RMC</option>
                 <option value="MC">MC</option>
                 <option value="MO">MO</option>
-                <option value="WMO">MWO</option>
+                <option value="MWO">MWO</option>
                 <option value="AMO">AMO</option>
                 <option value="AMS">AMS</option>
                 <option value="AWS">AWS</option>
             </select>
             <br><br>
-            <center><select class="browser-default custom-select" name="state" style="width:20em;"></center>
-                <option selected>State</option>
-                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Chhattisgarh">Chhattisgarh</option>
-                <option value="Dadra and Nagar Havelli">Dadra and Nagar Havelli</option>
-                <option value="New Delhi">New Delhi</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujrat">Gujrat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Lakshadweep">Lakshadweep</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Mizoram">Mizoram</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Puducherry">Puducherry</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Sikkim">Sikkim</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Tripura">Tripura</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Uttarakhand">Uttarakhand</option>
-                <option value="West Bengal">West Bengal</option>
-            </select>
-            <br><br>
-            <input type="text" name="district" class="form-control" placeholder="District" style="width:20em">
-            <br>
-            <input type="text" name="station" class="form-control" placeholder="Station" style="width:20em">
-            <br><br>
             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-            <br><br>
         </form>
         <?php
         	if($_SERVER["REQUEST_METHOD"] == "POST"){
         		$type = $_POST["obs_type"];
-        		$state = $_POST["state"];
-        		$district = $_POST["dsitrict"];
-        		$station = $_POST["station"];
         		if($type === 'RMC' || $type === 'MC' || $type === 'MO'){
-        			header("Location:1_add_report.php?obs='$station'");
+        			header("Location:1_add_report.php");
         			ob_end_flush();
         			exit();
         		}
         		if($type === 'MWO' || $type === 'AMO' || $type === 'AMS'){
-        			header("Location:2_add_report.php?obs='$station'");
+        			header("Location:2_add_report.php");
         			ob_end_flush();
         			exit();
         		}
         		if($type === 'AWS'){
-        			header("Location:3_add_report.php?obs='$station'");
+        			header("Location:3_add_report.php");
         			ob_end_flush();
         			exit();	
         		}

@@ -11,6 +11,10 @@ if(!$set){
 	exit();
 }
 ?>
+<?php
+	$type = trim($_GET["type"],"'");
+	$state = trim($_GET["state"],"'");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,50 +33,24 @@ if(!$set){
 </style>
 </head>
 <body>
-	<br>
-	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <center><select class="browser-default custom-select" name="state" style="width:20em;"></center>
-                <option selected>State</option>
-                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Chhattisgarh">Chhattisgarh</option>
-                <option value="Dadra and Nagar Havelli">Dadra and Nagar Havelli</option>
-                <option value="New Delhi">New Delhi</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujrat">Gujrat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Lakshadweep">Lakshadweep</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Mizoram">Mizoram</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Puducherry">Puducherry</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Sikkim">Sikkim</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Tripura">Tripura</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Uttarakhand">Uttarakhand</option>
-                <option value="West Bengal">West Bengal</option>
+	<br><br>
+
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <center><select class="browser-default custom-select" name="station" style="width:20em"></center>
+            	<?php 
+            		require_once('./utilities/db_connection.php');
+            		$query = "SELECT name from mc where type = '$type' AND state = '$state';";
+            		$res = getResult($query);
+            		
+            	?>
+            	<option selected>Station</option>
+                <?php while($row1 = mysqli_fetch_array($res)):;?>
+                    <option value="<?php echo $row1[0]; ?>"><?php echo $row1[0]; ?></option>
+                <?php endwhile;?>
+            		
+            	</option>
+
             </select>
-            <br><br>
-            <input type="text" name="district" class="form-control" placeholder="District" style="width:20em">
-            <br>
-            <input type="text" name="station" class="form-control" placeholder="Station" style="width:20em">
             <br><br>
 	<table class="table table-dark" id="myTable" style="width:70em">
 		<thead>
@@ -144,7 +122,6 @@ if(!$set){
 	</table>
 	</form>
 			<?php
-			if($_SERVER["REQUEST_METHOD"] == "POST"){
 				include('./utilities/db_connection.php');
 				$flag1 = 1;
 				function inject($instrument_name,$instrument_number){
@@ -196,7 +173,6 @@ if(!$set){
 				else{
 					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";	
 				}
-			}
 			?>
 		</tbody>
 	</table>

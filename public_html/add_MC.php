@@ -41,10 +41,47 @@ if(!$set){
       <input placeholder="District" type="text" name="district" id="district" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input placeholder="State" type="text" name="state" id="state" tabindex="2" required>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Password" type="password" name="password" id="password"tabindex="3" required>
+      <div class="custom-select" style="width:200px;">
+
+      <center><select class="dropdown-menu" name="state" id="state1" tabindex="4"></center>
+                <option selected>State</option>
+                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Dadra and Nagar Havelli">Dadra and Nagar Havelli</option>
+                <option value="New Delhi">New Delhi</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujrat">Gujrat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Lakshadweep">Lakshadweep</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Puducherry">Puducherry</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+            </select>
+        </div>
     </fieldset>
     <fieldset>
       <input placeholder="Web Site" type="url" name="website" id="website" tabindex="4">
@@ -75,9 +112,9 @@ if(!$set){
     	$website = $_POST['website'];
     	$query = "INSERT INTO mc(name,district,city,state,type) VALUES ('".$_POST["name"]."','".$_POST["district"]."','".$_POST["city"]."','".$_POST["state"]."','".$_POST["obs_type"]."');"; 
     	$check = getResult($query);
-    	$query2 = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["name"]."','".$_POST["password"]."','123',1);";
-    	$check2 = getResult($query2);
-    	if($check2 && $check){
+    	//$query2 = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["name"]."','".$_POST["password"]."','123',1);";
+    	//$check2 = getResult($query2);
+    	if($check){
     		header("Location:add_MC_conf.php");
     	}
     }

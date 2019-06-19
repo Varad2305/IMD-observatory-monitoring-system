@@ -85,6 +85,12 @@ if(!$set){
                 <li>
                     <a href="delete_MC.php">Delete Observatory</a>
                 </li>
+                <li>
+                    <a href="add_user.php">Add User</a>
+                </li>
+                <li>
+                    <a href="delete_user.php">Delete User</a>
+                </li>
             </ul>
         </nav>
 
@@ -113,17 +119,19 @@ if(!$set){
             <h5>You have unreviewed reports from:</h5> 
             <table>
                 <tr>
+                    <th>Inspector</th>
                     <th>Observatory</th>
                     <th>Date</th>
                     <th>Report</th>
                 </tr>
                 <?php
-                    include('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
+                    require_once('./utilities/db_connection.php');
+                    $query = "SELECT DISTINCT date_recorded,observatory,inspector FROM report WHERE reviewed = 0;";
                     $res = getResult($query);
                 ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
+                        <td><?php echo $row1[2];?></td>
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[0];?></td>
                         <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>";?></td>

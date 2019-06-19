@@ -53,23 +53,64 @@ if(!$set){
                 <option value="AWS">AWS</option>
             </select>
             <br><br>
+            <center><select class="browser-default custom-select" name="state" style="width:20em;" id="state1"></center>
+                <option selected>State</option>
+                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Dadra and Nagar Havelli">Dadra and Nagar Havelli</option>
+                <option value="New Delhi">New Delhi</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujrat">Gujrat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Lakshadweep">Lakshadweep</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Puducherry">Puducherry</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+            </select>
+            <noscript><input type="submit" value="Submit"></noscript>
+            <br><br>
             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
         </form>
         <?php
         	if($_SERVER["REQUEST_METHOD"] == "POST"){
         		$type = $_POST["obs_type"];
+        		$state = $_POST["state"];
         		if($type === 'RMC' || $type === 'MC' || $type === 'MO'){
-        			header("Location:1_add_report.php?type='$type'");
+        			header("Location:1_add_report.php?type='$type'&state='$state'");
         			ob_end_flush();
         			exit();
         		}
         		if($type === 'MWO' || $type === 'AMO' || $type === 'AMS'){
-        			header("Location:2_add_report.php?type='$type'");
+        			header("Location:2_add_report.php?type='$type'&state='$state'");
         			ob_end_flush();
         			exit();
         		}
         		if($type === 'AWS'){
-        			header("Location:3_add_report.php?type='$type'");
+        			header("Location:3_add_report.php?type='$type'&state='$state'");
         			ob_end_flush();
         			exit();	
         		}

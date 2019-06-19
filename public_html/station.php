@@ -53,7 +53,7 @@ if(!$set){
             </div>
 
             <ul class="list-unstyled components">
-                <p>Station <?php echo $_SESSION["username"];?></p>
+                <p>Inspector <?php echo $_SESSION["username"];?></p>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">

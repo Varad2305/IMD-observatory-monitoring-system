@@ -10,7 +10,7 @@ if(!$set){
 }
 ?>
 <?php
-	$obs = trim($_GET["obs"],"'");
+	$username = trim($_GET["username"],"'");
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,11 +20,11 @@ if(!$set){
 <body>
 	<?php
 		echo $obs;
-		include('./utilities/db_connection.php');
-		$query = "DELETE FROM mc WHERE name = '$obs';";
+		require_once('./utilities/db_connection.php');
+		$query = "DELETE FROM users WHERE username = '$username';";
 		$res = getResult($query);
 		if($res != FALSE){
-		header("Location:delete_MC.php");
+		header("Location:delete_user.php");
 		}
 		else{
 			echo "<script> alert('Error'); </script>";

@@ -46,7 +46,7 @@ if(!$set){
     <div class="container">
         <div class="card bg-info text-white">
             <div class="card-body">
-                Delete observatory
+                Delete User
             </div>
         </div>
     </div>
@@ -55,16 +55,16 @@ if(!$set){
     <center>
         <table class="roundedCorners">
         <tr style="background-color: #141414">
-            <center><th><font color= #f5f0f0>Observatory</font></th></center>
+            <center><th><font color= #f5f0f0>Users</font></th></center>
         </tr>
         <?php
             require_once('./utilities/db_connection.php');
-            $query = "SELECT name FROM mc";
+            $query = "SELECT username FROM users";
             $res = getResult($query);
         ?>
         <?php while($row1 = mysqli_fetch_array($res)):;?>
             <tr>    
-                <td><?php echo "<a onclick=\"return confirm('Delete this record?')\" href=\"delete_MC_conf.php?obs=".$row1[0]."\"> $row1[0]</a>"; ?></td>
+                <td><?php echo "<a onclick=\"return confirm('Delete this record?')\" href=\"delete_user_conf.php?username=".$row1[0]."\"> $row1[0]</a>"; ?></td>
             </tr>
             
         <?php endwhile; ?>
@@ -72,7 +72,7 @@ if(!$set){
     </center>
     <br><br>
     <div>
-            <a class="btn btn-primary" href="admin.php" role="button" style="margin-left: 3em; ">Go Back</a>
+            <a class="btn btn-primary" href="admin.php" role="button" style="margin-left: 3em;">Go Back</a>
     </div>
 </body>
 </html> 

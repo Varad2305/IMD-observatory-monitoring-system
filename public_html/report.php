@@ -61,7 +61,22 @@ if(!$set){
 		</div>
 	</div>
 	<br>
-	
+	<div class="container">
+		<div class="card bg-info text-white">
+			<div class="card-body">
+				<?php
+					require_once('./utilities/db_connection.php');
+					$query = "SELECT type from mc WHERE name = '$obs';";
+					$res = getResult($query);
+				?>
+				Type:
+				<?php while($row1 = mysqli_fetch_array($res)):;?>
+                    <?php echo $row1[0]; ?>
+                <?php endwhile;?>
+			</div>
+		</div>
+	</div>
+	<br><br>
 	<center><table class="roundedCorners">
 		<tr style="background-color: #141414">
 			<center><th><font color= #f5f0f0>Instrument</font></th></center>
@@ -69,7 +84,7 @@ if(!$set){
 			<center><th><font color= #f5f0f0>Remark</font></th></center>
 		</tr>
 		<?php
-			include('./utilities/db_connection.php');
+			require_once('./utilities/db_connection.php');
 			$query = "SELECT instrument,working,remark FROM report where observatory = '$obs' AND date_recorded = '$date';";
 			$res = getResult($query);
 			$status_colors = array(0 => '#ff0000',1 => '#00ff00',-1 => '#d3d3d3' );

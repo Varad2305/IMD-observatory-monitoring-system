@@ -2,22 +2,22 @@
 session_start();
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
-	unset($_SESSION["username"]);
-	unset($_SESSION["status"]);
-	header("Location: index.html?error=timed_out");
-	session_destroy();
-	exit();
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    session_destroy();
+    exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>State Wise Stats</title>
+    <title>IMD | Admin</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -30,15 +30,6 @@ if(!$set){
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <style>
-    .dropdown-menu{
-        width:350px !important;
-        height: 40px !important;
-        background-color: rgba(0,0,0,.5);
-        font-family: "Poppins",sans-serif;
-        font-weight: 100;
-        font-size: 12px;
-        line-height: 30px;
-    }
     table {
         border-collapse: collapse;
         width: 100%;
@@ -53,8 +44,10 @@ if(!$set){
     </style>
 
 </head>
+
 <body>
-<div class="wrapper">
+
+    <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -67,10 +60,7 @@ if(!$set){
                     <a href="admin.php">Home</a>
                 </li>
                 <li>
-                    <a href="all_reports.php" target="_blank">All Reports</a>
-                </li>
-                <li>
-                    <a href="statistics.php">Statistics</a>
+                    <a href="all_reports.php" >All Reports</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
@@ -86,8 +76,27 @@ if(!$set){
                            </li>
                     </ul>
                 </li>
-                 <li>
-                    <a href="add_MC.php">Add Observatory</a>
+                <li>
+                    <a href="#observatorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit Observatories</a>
+                    <ul class="collapse list-unstyled" id="observatorySubmenu">
+                        <li>
+                            <a href="add_MC.php">Add Observatory</a>        
+                        </li>
+                        <li>
+                            <a href="delete_MC.php">Delete Observatory</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit Users</a>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li>
+                            <a href="add_user.php">Add User</a>
+                        </li>
+                        <li>
+                            <a href="delete_user.php">Delete User</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -112,8 +121,7 @@ if(!$set){
                         <i class="fas fa-align-justify"></i>
                     </button>
                 </div>
-            </nav>
-            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+            </nav>            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
             <select class="browser-default custom-select" name="state">
             <?php
                 require_once('./utilities/db_connection.php');

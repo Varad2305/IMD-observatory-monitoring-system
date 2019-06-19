@@ -35,7 +35,16 @@ if(!$set){
 </head>
 <body>
 	<br><br>
-
+	<div class="container">
+		<div class="card bg-info text-white">
+			<div class="card-body">
+				1.Date and time are filled in by the system itself.<br>
+				2.Fill all the rows to submit the report successfully.<br>
+				3.You can submit only one report a day.<br>
+			</div>
+		</div>
+	</div>
+	<br>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <center><select class="browser-default custom-select" name="station" style="width:20em"></center>
             	<?php 
@@ -214,6 +223,7 @@ if(!$set){
 	</table>
 	</form>
 			<?php
+			if(isset($_POST["submit"])){
 				include('./utilities/db_connection.php');
 				$flag1 = 1;
 				function inject($instrument_name,$instrument_number){
@@ -271,6 +281,7 @@ if(!$set){
 				else{
 					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";
 				}
+			}
 			
 			?>
 		</tbody>

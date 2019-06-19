@@ -2,11 +2,11 @@
 session_start();
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
-	unset($_SESSION["username"]);
-	unset($_SESSION["status"]);
-	header("Location: index.html?error=timed_out");
-	session_destroy();
-	exit();
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    session_destroy();
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -56,17 +56,17 @@ if(!$set){
 
             <ul class="list-unstyled components">
                 <p>Admin</p>
-                <li>
+                <li class="active">
                     <a href="admin.php">Home</a>
                 </li>
                 <li>
-                    <a href="all_reports.php">All Reports</a>
+                    <a href="all_reports.php" >All Reports</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#">Page 1</a>
+                            <a href="state_wise_stats.php">State-wise</a>
                         </li>
                         <li>
                             <a href="#">Page 2</a>
@@ -76,8 +76,27 @@ if(!$set){
                            </li>
                     </ul>
                 </li>
-                 <li>
-                    <a href="add_MC.php">Add MC</a>
+                <li>
+                    <a href="#observatorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit Observatories</a>
+                    <ul class="collapse list-unstyled" id="observatorySubmenu">
+                        <li>
+                            <a href="add_MC.php">Add Observatory</a>        
+                        </li>
+                        <li>
+                            <a href="delete_MC.php">Delete Observatory</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit Users</a>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li>
+                            <a href="add_user.php">Add User</a>
+                        </li>
+                        <li>
+                            <a href="delete_user.php">Delete User</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

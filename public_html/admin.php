@@ -60,10 +60,7 @@ if(!$set){
                     <a href="admin.php">Home</a>
                 </li>
                 <li>
-                    <a href="all_reports.php" target="_blank">All Reports</a>
-                </li>
-                <li>
-                    <a href="statistics.php">Statistics</a>
+                    <a href="all_reports.php">All Reports</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
@@ -79,17 +76,27 @@ if(!$set){
                            </li>
                     </ul>
                 </li>
-                 <li>
-                    <a href="add_MC.php">Add Observatory</a>
+                <li>
+                    <a href="#observatorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit Observatories</a>
+                    <ul class="collapse list-unstyled" id="observatorySubmenu">
+                        <li>
+                            <a href="add_MC.php">Add Observatory</a>        
+                        </li>
+                        <li>
+                            <a href="delete_MC.php">Delete Observatory</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="delete_MC.php">Delete Observatory</a>
-                </li>
-                <li>
-                    <a href="add_user.php">Add User</a>
-                </li>
-                <li>
-                    <a href="delete_user.php">Delete User</a>
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit Users</a>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li>
+                            <a href="add_user.php">Add User</a>
+                        </li>
+                        <li>
+                            <a href="delete_user.php">Delete User</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

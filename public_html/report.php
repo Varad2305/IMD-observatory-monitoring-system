@@ -112,8 +112,10 @@ if(!$set){
                 </tr>
         <?php endwhile;?>
         <?php
+        if($_SESSION["status"] == 0){
         	$query2 = "UPDATE report SET reviewed = 1 WHERE observatory = '$obs' AND date_recorded = '$date';";
         	$res2 = getResult($query2);
+        }
         ?>
 
 	</table></center>

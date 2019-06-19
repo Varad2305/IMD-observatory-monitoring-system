@@ -117,18 +117,19 @@ if(!$set){
             <table>
                 <tr>
                     <th>Observatory</th>
+                    <th>Type</th>
                     <th>Date</th>
                     <th>Report</th>
                 </tr>
                 <?php
                     include('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded, observatory FROM report WHERE observatory = '".$_SESSION["username"]."' ";
-                    //$query = "SELECT DISTINCT date_recorded,observatory FROM report WHERE reviewed = 0;";
+                    $query = "SELECT DISTINCT date_recorded, observatory,type  FROM report,mc  WHERE inspector = '".$_SESSION["username"]."' AND report.observatory = mc.name";
                     $res = getResult($query);
                 ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
                         <td><?php echo $row1[1];?></td>
+                        <td><?php echo $row1[2];?></td>
                         <td><?php echo $row1[0];?></td>
                         <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'>Report</a>"?></td>
                     </tr>

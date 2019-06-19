@@ -225,7 +225,7 @@ if(!$set){
 					$working = $_POST[$instrument_number];
 					$remark = $_POST[$instrument_name];
 					$station = $_POST["station"];
-					$query = "INSERT INTO report(date_recorded,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'$station','$instrument','$working',0,'$remark');";
+					$query = "INSERT INTO report(date_recorded,inspector,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
 						$GLOBALS["flag1"] = 0;
@@ -240,6 +240,9 @@ if(!$set){
 							break;
 						}
 					}
+
+					if(empty($_POST["station"]) || empty($_POST["state"]) || empty($_POST["district"]))
+						$flag = 0;
 					return $flag;
 				}
 				if(all_set()){
@@ -267,7 +270,7 @@ if(!$set){
 					}
 				}
 				else{
-					echo "<script type='text/javascript'> alert('Please fill all rows'); </script>";	
+					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";
 				}
 			}
 			?>

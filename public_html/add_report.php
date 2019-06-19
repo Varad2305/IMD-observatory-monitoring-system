@@ -59,17 +59,17 @@ if(!$set){
         	if($_SERVER["REQUEST_METHOD"] == "POST"){
         		$type = $_POST["obs_type"];
         		if($type === 'RMC' || $type === 'MC' || $type === 'MO'){
-        			header("Location:1_add_report.php");
+        			header("Location:1_add_report.php?type='$type'");
         			ob_end_flush();
         			exit();
         		}
         		if($type === 'MWO' || $type === 'AMO' || $type === 'AMS'){
-        			header("Location:2_add_report.php");
+        			header("Location:2_add_report.php?type='$type'");
         			ob_end_flush();
         			exit();
         		}
         		if($type === 'AWS'){
-        			header("Location:3_add_report.php");
+        			header("Location:3_add_report.php?type='$type'");
         			ob_end_flush();
         			exit();	
         		}

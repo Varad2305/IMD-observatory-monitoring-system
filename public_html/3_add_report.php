@@ -73,7 +73,6 @@ if(!$set){
             <br>
             <input type="text" name="station" class="form-control" placeholder="Station" style="width:20em">
             <br><br>
-	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<table class="table table-dark" id="myTable" style="width:70em">
 		<thead>
 			<tr>
@@ -152,7 +151,9 @@ if(!$set){
 					$working = $_POST[$instrument_number];
 					$remark = $_POST[$instrument_name];
 					$station = $_POST["station"];
-					$query = "INSERT INTO report(date_recorded,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'$station','$instrument','$working',0,'$remark');";
+					$state = $_POST["state"];
+					$district = $_POST["district"];
+					$query = "INSERT INTO report(date_recorded,inspector,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
 						$GLOBALS["flag1"] = 0;
@@ -167,8 +168,13 @@ if(!$set){
 							break;
 						}
 					}
+
+					if(empty($_POST["station"]) || empty($_POST["state"]) || empty($_POST["district"]))
+						$flag = 0;
+					
 					return $flag;
 				}
+
 				if(all_set()){
 					inject("Wind_Sensor","1");
 					inject("AT_Sensor","2");
@@ -180,14 +186,14 @@ if(!$set){
 
 					
 					if($flag1 == 0){
-						echo "<script type='text/javascript'> alert('You have already filled a report today'); </script>";		
+						echo "<script type='text/javascript'> alert('You have already filled a report for this station today'); </script>";
 					}
 					else{
 						echo "<script type='text/javascript'> alert('Success'); </script>";
 					}
 				}
 				else{
-					echo "<script type='text/javascript'> alert('Please fill all rows'); </script>";	
+					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";	
 				}
 			}
 			?>

@@ -2,6 +2,6 @@
 	alert("MC added succesfully");
 </script>
 <?php
-	sleep(2);
-	header("Location:admin.php");
+	sleep(0);
+	header("Location:add_MC.php");
 ?>

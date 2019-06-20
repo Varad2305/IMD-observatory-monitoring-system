@@ -1,6 +1,13 @@
-<?php
-	echo "MC added successfully. You'll be redirected to youe home page in 2 seconds";
-	$a = sleep(2);
-	echo $a;
-	header("a");
-?>
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
+</body>
+</html>
+

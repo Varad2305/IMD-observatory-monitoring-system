@@ -1,4 +1,4 @@
-<!-- yooo -->
+
 <?php
 session_start();
 $gender = "";
@@ -124,6 +124,62 @@ if(!$set){
 					<td><input type="text" name="Global_Radiator" placeholder="Remark.."></td>
 			</tr>
 			<tr>
+					<td>Solar Panel</td>
+					<td><input type="radio" name="8" value=1></td>
+					<td><input type="radio" name="8" value=0></td>
+					<td><input type="radio" name="8" value=-1></td>
+					<td><input type="text" name="Solar_Panel" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>Charge Controller</td>
+					<td><input type="radio" name="9" value=1></td>
+					<td><input type="radio" name="9" value=0></td>
+					<td><input type="radio" name="9" value=-1></td>
+					<td><input type="text" name="Charge_Controller" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>Battery</td>
+					<td><input type="radio" name="10" value=1></td>
+					<td><input type="radio" name="10" value=0></td>
+					<td><input type="radio" name="10" value=-1></td>
+					<td><input type="text" name="Battery" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>SAT. Antenna</td>
+					<td><input type="radio" name="11" value=1></td>
+					<td><input type="radio" name="11" value=0></td>
+					<td><input type="radio" name="11" value=-1></td>
+					<td><input type="text" name="SAT_Antenna" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>GPRS Antenna</td>
+					<td><input type="radio" name="12" value=1></td>
+					<td><input type="radio" name="12" value=0></td>
+					<td><input type="radio" name="12" value=-1></td>
+					<td><input type="text" name="GPRS_Antenna" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>GPS</td>
+					<td><input type="radio" name="13" value=1></td>
+					<td><input type="radio" name="13" value=0></td>
+					<td><input type="radio" name="13" value=-1></td>
+					<td><input type="text" name="GPS" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>Enclosure</td>
+					<td><input type="radio" name="14" value=1></td>
+					<td><input type="radio" name="14" value=0></td>
+					<td><input type="radio" name="14" value=-1></td>
+					<td><input type="text" name="Enclosure" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>SIM Card</td>
+					<td><input type="radio" name="15" value=1></td>
+					<td><input type="radio" name="15" value=0></td>
+					<td><input type="radio" name="15" value=-1></td>
+					<td><input type="text" name="SIM_Card" placeholder="Remark.."></td>
+			</tr>
+			<tr>
 				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
 				<td></td>
 				<td></td>
@@ -133,16 +189,14 @@ if(!$set){
 	</table>
 	</form>
 			<?php
-			if(isset($_POST["submit"]))
-				include('./utilities/db_connection.php');
+			if(isset($_POST["submit"])){
+				require_once('./utilities/db_connection.php');
 				$flag1 = 1;
 				function inject($instrument_name,$instrument_number){
 					$instrument = $instrument_name;
 					$working = $_POST[$instrument_number];
 					$remark = $_POST[$instrument_name];
 					$station = $_POST["station"];
-					$state = $_POST["state"];
-					$district = $_POST["district"];
 					$query = "INSERT INTO report(date_recorded,inspector,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
@@ -151,7 +205,7 @@ if(!$set){
 				}
 				function all_set(){
 					$flag = 1;
-					for ($i=1; $i<=7; $i++){ 
+					for ($i=1; $i<=15; $i++){ 
 						$j = strval($i);
 						if(!isset($_POST[$j])){
 							$flag = 0;
@@ -159,7 +213,7 @@ if(!$set){
 						}
 					}
 
-					if(empty($_POST["station"]) || empty($_POST["state"]) || empty($_POST["district"]))
+					if(empty($_POST["station"]))
 						$flag = 0;
 					
 					return $flag;
@@ -173,10 +227,19 @@ if(!$set){
 					inject("SM","5");
 					inject("ST","6");
 					inject("Global_Radiator","7");
+					inject("Solar_Panel","8");
+					inject("Charge_Controller","9");
+					inject("Battery","10");
+					inject("SAT_Antenna","11");
+					inject("GPRS_Antenna","12");
+					inject("GPS","13");
+					inject("Enclosure","14");
+					inject("SIM_Card","15");
 
 					
 					if($flag1 == 0){
 						echo "<script type='text/javascript'> alert('You have already filled a report for this station today'); </script>";
+
 					}
 					else{
 						echo "<script type='text/javascript'> alert('Success'); </script>";
@@ -184,6 +247,7 @@ if(!$set){
 				}
 				else{
 					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";	
+
 				}
 
 			}

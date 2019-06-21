@@ -1,6 +1,5 @@
 <?php
 session_start();
-$gender = "";
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
 	unset($_SESSION["username"]);

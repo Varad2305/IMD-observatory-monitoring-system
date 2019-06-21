@@ -122,21 +122,22 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <h2>All Reports</h2><br></br>
-            <h5>You have unreviewed reports from:</h5> 
+            <h2>All Reports</h2><br></br> 
             <table>
                 <tr>
+                    <th>Inspector</th>  
                     <th>Observatory</th>
                     <th>Date</th>
                     <th>Report</th>
                 </tr>
                 <?php
                     include('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded,observatory FROM report";
+                    $query = "SELECT DISTINCT date_recorded,observatory,inspector FROM report";
                     $res = getResult($query);
                 ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
+                        <td><?php echo $row1[2];?></td>
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[0];?></td>
    					    <td><a href= <?php echo "report.php?obs='".$row1[1]."'&date='".$row1[0]."'"?> target="_blank">Report</a></td>

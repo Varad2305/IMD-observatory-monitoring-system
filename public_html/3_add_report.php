@@ -1,7 +1,6 @@
-
 <?php
 session_start();
-$gender = "";
+ob_start();
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
 	unset($_SESSION["username"]);
@@ -190,23 +189,31 @@ if(!$set){
 	</form>
 			<?php
 			if(isset($_POST["submit"])){
+				
 				require_once('./utilities/db_connection.php');
+				
 				$flag1 = 1;
+				
 				function inject($instrument_name,$instrument_number){
 					$instrument = $instrument_name;
 					$working = $_POST[$instrument_number];
 					$remark = $_POST[$instrument_name];
 					$station = $_POST["station"];
+				
 					$query = "INSERT INTO report(date_recorded,inspector,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
+				
 					if($res === FALSE){
 						$GLOBALS["flag1"] = 0;
 					}
 				}
+				
 				function all_set(){
 					$flag = 1;
+					
 					for ($i=1; $i<=15; $i++){ 
 						$j = strval($i);
+						
 						if(!isset($_POST[$j])){
 							$flag = 0;
 							break;
@@ -220,6 +227,7 @@ if(!$set){
 				}
 
 				if(all_set()){
+					
 					inject("Wind_Sensor","1");
 					inject("AT_Sensor","2");
 					inject("AP_Sensor","3");
@@ -239,17 +247,22 @@ if(!$set){
 					
 					if($flag1 == 0){
 						echo "<script type='text/javascript'> alert('You have already filled a report for this station today'); </script>";
-
+						header("Location:add_report.php?errortype=1");
+						ob_end_flush()();
+						exit();
 					}
+					
 					else{
 						echo "<script type='text/javascript'> alert('Success'); </script>";
 					}
 				}
 				else{
-					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";	
-
+					echo "<script type='text/javascript'> confirm('Please check that you have filled the full form'); </script>";	
+					header("Location:add_report.php?errortype=2");
+					ob_end_flush();
+					exit();
+					
 				}
-
 			}
 			?>
 		</tbody>

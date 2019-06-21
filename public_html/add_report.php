@@ -11,6 +11,19 @@ if(!$set){
 	exit();
 }
 ?>
+<?php
+    $error = trim($_GET["errortype"],"'");
+    if(isset($error)){
+        if($error == 2){
+            echo "<script> alert('You did not fill the full form'); </script>";
+        }
+
+        if($error == 1){
+            echo "<script> alert('You have already filled a report for that station today'); </script>";
+        }
+    }
+    
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +125,7 @@ if(!$set){
         		if($type === 'AWS'){
         			header("Location:3_add_report.php?type='$type'&state='$state'");
         			ob_end_flush();
-        			exit();	
+        			exit();
         		}
         	}	
         ?>

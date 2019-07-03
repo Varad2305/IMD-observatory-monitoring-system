@@ -12,6 +12,7 @@ if(!$set){
 <?php
 		$obs = trim($_GET["obs"],"'");
 		$date = trim($_GET["date"],"'");
+		$type = trim($_GET["type"],"'");
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,15 +65,10 @@ if(!$set){
 	<div class="container">
 		<div class="card bg-info text-white">
 			<div class="card-body">
-				<?php
-					require_once('./utilities/db_connection.php');
-					$query = "SELECT type from mc WHERE name = '$obs';";
-					$res = getResult($query);
-				?>
 				Type:
-				<?php while($row1 = mysqli_fetch_array($res)):;?>
-                    <?php echo $row1[0]; ?>
-                <?php endwhile;?>
+				<?php
+					echo $type;
+				?>
 			</div>
 		</div>
 	</div>
@@ -111,6 +107,20 @@ if(!$set){
                     <td><?php echo $row1[2]; ?></td>
                 </tr>
         <?php endwhile;?>
+        <?php
+        	require_once('./utilities/db_connection.php');
+        	$query = "SELECT * FROM images WHERE date_recorded = '$date' AND observatory = '$obs' AND type = '$type';";
+        	$result = getResult($query);
+        	while ($row = mysqli_fetch_array($result)) {
+      			echo "<div id='img_div'>";
+        		echo "<img src='images/".$row['image']."' style='max-width:70%;height:auto'>";
+        		echo "<p>".$row['image_text']."</p>";
+      			echo "</div><br><br>";
+
+    		}
+  		?>
+
+        ?>
         <?php
         if($_SESSION["status"] == 0){
         	$query2 = "UPDATE report SET reviewed = 1 WHERE observatory = '$obs' AND date_recorded = '$date';";

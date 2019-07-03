@@ -125,22 +125,24 @@ if(!$set){
             <h2>All Reports</h2><br></br> 
             <table>
                 <tr>
-                    <th>Inspector</th>  
+                    <th>Inspector</th>
                     <th>Observatory</th>
+                    <th>Type</th>
                     <th>Date</th>
                     <th>Report</th>
                 </tr>
                 <?php
-                    include('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded,observatory,inspector FROM report";
+                    require_once('./utilities/db_connection.php');
+                    $query = "SELECT DISTINCT inspector,observatory,type,date_recorded FROM report;";
                     $res = getResult($query);
                 ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
-                        <td><?php echo $row1[2];?></td>
-                        <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[0];?></td>
-   					    <td><a href= <?php echo "report.php?obs='".$row1[1]."'&date='".$row1[0]."'"?> target="_blank">Report</a></td>
+                        <td><?php echo $row1[1];?></td>
+                        <td><?php echo $row1[2];?></td>
+                        <td><?php echo $row1[3];?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

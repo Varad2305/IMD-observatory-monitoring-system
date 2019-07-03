@@ -64,7 +64,7 @@ if(!$set){
         ?>
         <?php while($row1 = mysqli_fetch_array($res)):;?>
             <tr>    
-                <td><?php echo "<a onclick=\"return confirm('Delete this record?')\" href=\"delete_user_conf.php?username=".$row1[0]."\"> $row1[0]</a>"; ?></td>
+                <td><?php echo "<a onclick=\"return confirm('Delete this user?')\" href=\"delete_user_conf.php?username=".$row1[0]."\"> $row1[0]</a>"; ?></td>
             </tr>
             
         <?php endwhile; ?>

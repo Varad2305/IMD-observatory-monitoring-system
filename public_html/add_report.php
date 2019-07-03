@@ -107,11 +107,13 @@ if(!$set){
             <noscript><input type="submit" value="Submit"></noscript>
             <br><br>
             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-        </form>
+        </form><br><br>
+        <button class="btn btn-primary" type="button" onclick="window.location='station.php';">Go back</button>
         <?php
         	if($_SERVER["REQUEST_METHOD"] == "POST"){
         		$type = $_POST["obs_type"];
         		$state = $_POST["state"];
+        		$_SESSION["type"] = $type;
         		if($type === 'RMC' || $type === 'MC' || $type === 'MO'){
         			header("Location:1_add_report.php?type='$type'&state='$state'");
         			ob_end_flush();

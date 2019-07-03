@@ -132,17 +132,11 @@ if(!$set){
                 <?php while($row1 = mysqli_fetch_array($states_result)):;?>
                     <option value="<?php echo $row1[0]; ?>"><?php echo $row1[0]; ?></option>
                 <?php endwhile;?>
-            </select>
-            <br>
-            <br>
-            <input placeholder="Start Date" class="browser-default custom-select" type="text" onfocus="(this.type='date')"  id="start_date" name="start_date">
-            <br>
-            <br>
+            </select><br><br>
+            <input placeholder="Start Date" class="browser-default custom-select" type="text" onfocus="(this.type='date')"  id="start_date" name="start_date"><br><br>
             <input placeholder="End Date" class="browser-default custom-select" type="text" onfocus="(this.type='date')"  id="end_date" name="end_date"><br><br>
             <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-            </form>
-            <br>
-            <br>
+            </form><br><br>
             <?php
                 require_once('./utilities/db_connection.php');
                 $start_date = $_POST["start_date"];
@@ -154,9 +148,7 @@ if(!$set){
             ?>
             <div class="browser-default">
                 Reports in <strong><?php echo $state; ?></strong> between <strong><?php echo $start_date; ?></strong> and <strong><?php echo $end_date; ?></strong>:<br>
-            </div>
-            <br>
-            <br>
+            </div><br><br>
             <table>
                 <tr>
                     <th>Observatory</th>
@@ -199,7 +191,6 @@ if(!$set){
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(all_instruments);
 
-                
                 function all_instruments() {
                     var total_working = <?php echo $total_working; ?>;
                     var total_not_working = <?php echo $total_not_working; ?>;
@@ -241,10 +232,7 @@ if(!$set){
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
-                
-
             </table>
-
         </div>
     </div>
 

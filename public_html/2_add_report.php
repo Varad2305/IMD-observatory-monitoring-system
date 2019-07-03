@@ -213,17 +213,18 @@ if(!$set){
 					<td><input type="text" name="DIIWE" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-				<td><a class="btn btn-primary" href="station.php" role="button">Go Back</a></td>
+				<td><a class="btn btn-primary" href="add_report.php" role="button">Go Back</a></td>
 				<td></td>
 				<td></td>
-				<td><input type="submit" class="btn btn-primary" name="submit" value="Submit"></td>
+				<td><input type="submit" class="btn btn-primary" name="submit" value="Upload Image"></td>
 			</tr>
 		</tbody>
 	</table>
 	</form>
 			<?php
 			if(isset($_POST["submit"])){
-				include('./utilities/db_connection.php');
+				$_SESSION["observatory"] = $_POST["station"];
+				require_once('./utilities/db_connection.php');
 				$flag1 = 1;
 				function inject($instrument_name,$instrument_number){
 					$instrument = $instrument_name;
@@ -272,13 +273,22 @@ if(!$set){
 					inject("DIIWE","20");
 					if($flag1 == 0){
 						echo "<script type='text/javascript'> alert('You have already filled a report today'); </script>";		
+						header("Location:add_report.php?errortype=1");
+						ob_end_flush()();
+						exit();
 					}
 					else{
 						echo "<script type='text/javascript'> alert('Success'); </script>";
+						header("Location:image_upload.php");
+						ob_end_flush();
+						exit();
 					}
 				}
 				else{
 					echo "<script type='text/javascript'> alert('Please check that you have filled the full form'); </script>";
+					header("Location:add_report.php?errortype=2");
+					ob_end_flush();
+					exit();
 				}
 			}
 			

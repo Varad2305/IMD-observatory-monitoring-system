@@ -2,11 +2,11 @@
 session_start();
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
-	unset($_SESSION["username"]);
-	unset($_SESSION["status"]);
-	header("Location: index.html?error=timed_out");
-	session_destroy();
-	exit();
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    session_destroy();
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ if(!$set){
                     <a href="admin.php">Home</a>
                 </li>
                 <li>
-                    <a href="all_reports.php">All Reports</a>
+                    <a href="all_reports.php" >All Reports</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
@@ -111,7 +111,6 @@ if(!$set){
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    <span>IMD SIMS</span>
                     <form action="/IMD/public_html/index.php" method="get">
                         <button type="submit" class="btn btn-info">
                             <i class="fa fa-sign-out"></i>
@@ -122,33 +121,100 @@ if(!$set){
                         <i class="fas fa-align-justify"></i>
                     </button>
                 </div>
-            </nav>
-            <h2>Welcome Admin</h2><br></br>
-            <h5>You have unreviewed reports from:</h5> 
-            <table>
-                <tr>
-                    <th>Inspector</th>
-                    <th>Observatory</th>
-                    <th>Date</th>
-                    <th>Report</th>
-                </tr>
-                <?php
-                    require_once('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT date_recorded,observatory,inspector FROM report WHERE reviewed = 0;";
-                    $res = getResult($query);
-                ?>
-                <?php while($row1 = mysqli_fetch_array($res)):;?>
-                    <tr>
-                        <td><?php echo $row1[2];?></td>
-                        <td><?php echo $row1[1];?></td>
-                        <td><?php echo $row1[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>";?></td>
-                    </tr>
+            </nav>            
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+            <select class="browser-default custom-select" name="instrument">
+            <?php
+                require_once('./utilities/db_connection.php');
+                $instruments_query = "SELECT DISTINCT instrument FROM report ORDER BY instrument ASC;";
+                $instruments_result = getResult($instruments_query);
+            ?>
+                <option selected>Instrument</option>
+                <?php while($row1 = mysqli_fetch_array($instruments_result)):;?>
+                    <option value="<?php echo $row1[0]; ?>"><?php echo $row1[0]; ?></option>
                 <?php endwhile;?>
-            </table>
+            </select><br><br>
+            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            </form><br><br>
+            <?php
+                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                    require_once('./utilities/db_connection.php');
+                    $instrument = $_POST["instrument"];
 
-        </div>
-    </div>
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 1 AND instrument = '$instrument';";
+                    $res_working = getResult($query);
+
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND instrument = '$instrument';";
+                    $res_not_working = getResult($query);
+
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND instrument = '$instrument';";
+                    $res_not_available = getResult($query);
+                }
+
+            ?>
+            <div class="browser-default">
+            </div><br><br>
+            <div>
+                <strong>Working in:</strong>
+                <table>
+                    <tr>
+                        <th width="50%">Observatory</th>
+                        <th width="50%">State</th>
+                    </tr>
+                    <?php while($row1 = mysqli_fetch_array($res_working)):;?>
+                        <tr>
+                            <td width="50%"><?php echo $row1[2];?></td>
+                            <?php
+                                $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
+                                $sub_res = getResult($sub_query);
+                                while($row2 = mysqli_fetch_array($sub_res)):;?>
+                                    <td width="50%"><?php echo $row2[0]; ?></td>
+                                <?php endwhile; ?>
+                        </tr>
+                    <?php endwhile;?>
+                    <tr></tr>
+                </table>
+                <br><br>
+                <strong>Not Working in:</strong>
+                <table>
+                    <tr>
+                        <th width="50%">Observatory</th>
+                        <th width="50%">State</th>
+                    </tr>
+                    <?php while($row1 = mysqli_fetch_array($res_not_working)):;?>
+                        <tr>
+                            <td width="50%"><?php echo $row1[2];?></td>
+                            <?php
+                                $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
+                                $sub_res = getResult($sub_query);
+                                while($row2 = mysqli_fetch_array($sub_res)):;?>
+                                    <td width="50%"><?php echo $row2[0]; ?></td>
+                                <?php endwhile; ?>
+                        </tr>
+                    <?php endwhile;?>
+                    <tr></tr>
+                </table>
+                <br><br>
+                <strong>Not Available in:</strong>
+                <table>
+                    <tr>
+                        <th width="50%">Observatory</th>
+                        <th width="50%">State</th>
+                    </tr>
+                    <?php while($row1 = mysqli_fetch_array($res_not_available)):;?>
+                        <tr>
+                            <td width="50%"><?php echo $row1[2];?></td>
+                            <?php
+                                $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
+                                $sub_res = getResult($sub_query);
+                                while($row2 = mysqli_fetch_array($sub_res)):;?>
+                                    <td width="50%"><?php echo $row2[0]; ?></td>
+                                <?php endwhile; ?>
+                        </tr>
+                    <?php endwhile;?>
+                    <tr></tr>
+                </table>
+            </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -173,5 +239,4 @@ if(!$set){
         });
     </script>
 </body>
-
 </html>

@@ -116,10 +116,8 @@ if(!$set){
         		echo "<img src='images/".$row['image']."' style='max-width:70%;height:auto'>";
         		echo "<p>".$row['image_text']."</p>";
       			echo "</div><br><br>";
-
-    		}
-  		?>
-
+			}
+				
         ?>
         <?php
         if($_SESSION["status"] == 0){

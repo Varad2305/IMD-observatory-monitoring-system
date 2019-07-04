@@ -137,6 +137,7 @@ if(!$set){
                     require_once('./utilities/db_connection.php');
                     $query = "SELECT DISTINCT inspector,observatory,type,date_recorded FROM report WHERE reviewed = 0;";
                     $res = getResult($query);//bob
+
                 ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>

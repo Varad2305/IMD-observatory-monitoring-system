@@ -202,7 +202,7 @@ if(!$set){
 					$remark = $_POST[$instrument_name];
 					$station = $_POST["station"];
 					
-					$query = "INSERT INTO report(date_recorded,inspector,observatory,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','$instrument','$working',0,'$remark');";
+					$query = "INSERT INTO report(date_recorded,inspector,observatory,type,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','".$_SESSION["type"]."','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
 						$GLOBALS["flag1"] = 0;

@@ -142,29 +142,37 @@ if(!$set){
                 $start_date = $_POST["start_date"];
                 $end_date = $_POST["end_date"];
                 $state = $_POST["state"];
+                
                 if($state == 'All States'){
-                    $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date';";
+                    $query = "SELECT DISTINCT date_recorded,observatory,type,inspector from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date';";
                 }
                 else{
-                    $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
+                    $query = "SELECT DISTINCT date_recorded,observatory,type,inspector from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
                 }
 
                 $res = getResult($query);
+                
             ?>
             <div class="browser-default">
                 Reports in <strong><?php echo $state; ?></strong> between <strong><?php echo $start_date; ?></strong> and <strong><?php echo $end_date; ?></strong>:<br>
             </div><br><br>
             <table>
                 <tr>
+                    <th>Inspector</th>
                     <th>Observatory</th>
+                    <th>Type</th>
                     <th>Date</th>
-                    <th>Report</th>
+                    <th>View Report</th>
+                    <th>Download Report</th>
                 </tr>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
+                        <td><?php echo $row1[3];?></td>
                         <td><?php echo $row1[1];?></td>
-                        <td><?php echo $row1[0];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."' target='_blank'>Report</a>";?></td>
+                        <td><?php echo $row1[2];?></td>
+                        <td><?php echo $row1[0];?></td>                        
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
+                        <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[0]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>
@@ -184,7 +192,7 @@ if(!$set){
                 mysqli_free_result($result);
 
                 if($state == 'All States'){
-                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND top_date BETWEEN '$start_date';";
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND top_date BETWEEN '$start_date' AND '$end_date';";
                 }
 
                 else{
@@ -241,7 +249,12 @@ if(!$set){
                 </thead>
                 <?php
                     require_once('./utilities/db_connection.php');
-                    $query = "SELECT instrument, SUM(CASE WHEN working = 1 THEN 1 ELSE 0 END) Working, SUM(CASE WHEN working = 0 THEN 1 ELSE 0 END) Not_working, SUM(CASE WHEN working = -1 THEN 1 ELSE 0 END) Not_available FROM report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name FROM mc where state = '$state') GROUP BY instrument;";
+                    if($state == 'All States'){
+                        $query = "SELECT instrument, SUM(CASE WHEN working = 1 THEN 1 ELSE 0 END) Working, SUM(CASE WHEN working = 0 THEN 1 ELSE 0 END) Not_working, SUM(CASE WHEN working = -1 THEN 1 ELSE 0 END) Not_available FROM report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' GROUP BY instrument;";    
+                    }
+                    else{
+                        $query = "SELECT instrument, SUM(CASE WHEN working = 1 THEN 1 ELSE 0 END) Working, SUM(CASE WHEN working = 0 THEN 1 ELSE 0 END) Not_working, SUM(CASE WHEN working = -1 THEN 1 ELSE 0 END) Not_available FROM report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name FROM mc where state = '$state') GROUP BY instrument;";
+                    }
                     $table_result = getResult($query);
                 ?>
                 <tbody>

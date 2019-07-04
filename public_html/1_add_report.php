@@ -243,7 +243,7 @@ if(!$set){
 					if($flag1 == 0){
 						echo "<script type='text/javascript'> alert('You have already filled a report today'); </script>";		
 						header("Location:add_report.php?errortype=1");
-						ob_end_flush()();
+						ob_end_flush();
 						exit();
 					}
 					else{

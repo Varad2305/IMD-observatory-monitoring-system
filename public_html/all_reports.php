@@ -129,7 +129,8 @@ if(!$set){
                     <th>Observatory</th>
                     <th>Type</th>
                     <th>Date</th>
-                    <th>Report</th>
+                    <th>View Report</th>
+                    <th>Download Report</th>
                 </tr>
                 <?php
                     require_once('./utilities/db_connection.php');
@@ -142,7 +143,8 @@ if(!$set){
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[2];?></td>
                         <td><?php echo $row1[3];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Report</a>";?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
+                        <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

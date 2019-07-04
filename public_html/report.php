@@ -10,9 +10,9 @@ if(!$set){
 }
 ?>
 <?php
-		$obs = trim($_GET["obs"],"'");
-		$date = trim($_GET["date"],"'");
-		$type = trim($_GET["type"],"'");
+	$obs = trim($_GET["obs"],"'");
+	$date = trim($_GET["date"],"'");
+	$type = trim($_GET["type"],"'");
 ?>
 <!DOCTYPE html>
 <html>
@@ -117,7 +117,7 @@ if(!$set){
         		echo "<p>".$row['image_text']."</p>";
       			echo "</div><br><br>";
 			}
-				
+
         ?>
         <?php
         if($_SESSION["status"] == 0){

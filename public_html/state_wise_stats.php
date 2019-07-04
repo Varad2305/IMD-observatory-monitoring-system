@@ -128,7 +128,7 @@ if(!$set){
                 $states_query = "SELECT DISTINCT state FROM mc;";
                 $states_result = getResult($states_query);
             ?>
-                <option selected>State</option>
+                <option selected>All States</option>
                 <?php while($row1 = mysqli_fetch_array($states_result)):;?>
                     <option value="<?php echo $row1[0]; ?>"><?php echo $row1[0]; ?></option>
                 <?php endwhile;?>
@@ -142,8 +142,13 @@ if(!$set){
                 $start_date = $_POST["start_date"];
                 $end_date = $_POST["end_date"];
                 $state = $_POST["state"];
+                if($state == 'All States'){
+                    $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date';";
+                }
+                else{
+                    $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
+                }
 
-                $query = "SELECT DISTINCT date_recorded,observatory from report WHERE date_recorded BETWEEN '$start_date' AND '$end_date' AND observatory IN (SELECT name from mc WHERE state = '$state');";
                 $res = getResult($query);
             ?>
             <div class="browser-default">
@@ -167,17 +172,34 @@ if(!$set){
             <?php  
                 require_once('./utilities/db_connection.php');
 
-                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 1 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                if($state == 'All States'){
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 1 AND top_date BETWEEN '$start_date' AND '$end_date';";
+                }
+
+                else{
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 1 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                }
                 $result = getResult($query);
                 $total_working = mysqli_num_rows($result);
                 mysqli_free_result($result);
 
-                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                if($state == 'All States'){
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND top_date BETWEEN '$start_date';";
+                }
+
+                else{
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                }
                 $result = getResult($query);
                 $total_not_working = mysqli_num_rows($result);
                 mysqli_free_result($result);
 
-                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                if($state == 'All States'){
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND top_date BETWEEN '$start_date' AND '$end_date';";    
+                }
+                else{
+                    $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND top_date BETWEEN '$start_date' AND '$end_date' AND each_item.observatory IN (SELECT name FROM mc where state = '$state');";
+                }
                 $result = getResult($query);
                 $total_not_available = mysqli_num_rows($result);
                 mysqli_free_result($result);

@@ -247,7 +247,7 @@ if(!$set){
 							break;
 						}
 					}
-					if(empty($_POST["station"]) || empty($_POST["state"]) || empty($_POST["district"]))
+					if(empty($_POST["station"]))
 						$flag = 0;
 					return $flag;
 				}

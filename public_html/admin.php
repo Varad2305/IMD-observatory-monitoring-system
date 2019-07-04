@@ -142,7 +142,7 @@ if(!$set){
                     <tr>
                         <td><?php echo $row1[0];?></td>
                         <td><?php echo $row1[1];?></td>
-                        <td><?php echo $row1[2];?></td> /
+                        <td><?php echo $row1[2];?></td>
                         <td><?php echo $row1[3];?></td>
                         <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Report</a>";?></td>
                     </tr>

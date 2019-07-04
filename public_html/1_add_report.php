@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 $set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
 	unset($_SESSION["username"]);

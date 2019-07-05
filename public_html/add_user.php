@@ -29,31 +29,37 @@ if(!$set){
 </style>
 <body>
 	<div class="container">  
-  <form id="contact" action="" method="post">
+  <form id="contact" action=""method="post">
     <h3>Add a New User</h3>
     <fieldset>
       <input placeholder="Username" type="text" name="username"  tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input placeholder="Password" type="password" name="password"  tabindex="1" required autofocus>
+      <input placeholder="Email" type="text" name="email"  tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input placeholder="Password" type="radio" name="type"  tabindex="1" value="0" required autofocus>Officer &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <input placeholder="Password" type="radio" name="type"  tabindex="2" value="1" required autofocus>Admin
+      <input placeholder="Password" type="password" name="password"  tabindex="1" required>
+    </fieldset>
+    <fieldset>
+      <input type="radio" name="type"  tabindex="1" value=1 required autofocus>Officer &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <input type="radio" name="type"  tabindex="2" value=0 required autofocus>Admin
     </fieldset>
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+    <fieldset>
+      <a href="mailto:<?php echo $_POST["email"];?>?subject=Your%20Credentials&body=Username:<?php echo $_POST["username"];?>%0D%0APassword:<?php echo $_POST["password"];?>" target = "_blank"class="btn btn-primary">Send Email</a>
     </fieldset>
   </form>
   <?php
   	if($_SERVER["REQUEST_METHOD"] == "POST"){
   		require_once('./utilities/db_connection.php');
       $hashed_pwd = hash('sha512',$_POST["password"] + '123');
-    	$query = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["username"]."','$hashed_pwd','123',".$_POST["type"].");";
+    	$query = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["username"]."','$hashed_pwd','123','".$_POST["type"]."');";
     	$check = getResult($query);
-    	if($check){
-    		header("Location:add_user_conf.php");
-    	}
+    	// if($check){
+    	// 	header("Location:add_user_conf.php");
+    	// }
     }
   ?>
 </div>

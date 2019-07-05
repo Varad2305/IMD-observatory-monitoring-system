@@ -1,19 +1,17 @@
 <?php
 session_start();
-ob_start();
-$set = isset($_SESSION["username"]);
+$set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
 if(!$set){
-	unset($_SESSION["username"]);
-	unset($_SESSION["status"]);
-	header("Location: index.html?error=timed_out");
-    ob_end_flush();
-	session_destroy();
-	exit();
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    session_destroy();
+    exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +51,7 @@ if(!$set){
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Observatory Monitoring System<h3>
+                <h3>Observatory Monitoring System</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -62,7 +60,7 @@ if(!$set){
                     <a href="admin.php">Home</a>
                 </li>
                 <li>
-                    <a href="all_reports.php">All Reports</a>
+                    <a href="all_reports.php" >All Reports</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
@@ -113,9 +111,8 @@ if(!$set){
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    <span>IMD SIMS</span>
                     <form action="/IMD/public_html/index.php" method="get">
-                        <button type="submit" class="btn btn-info" name="signout">
+                        <button type="submit" class="btn btn-info">
                             <i class="fa fa-sign-out"></i>
                             <span>Sign out</span>
                         </button>
@@ -124,31 +121,84 @@ if(!$set){
                         <i class="fas fa-align-justify"></i>
                     </button>
                 </div>
-            </nav>
-            <h2>Welcome <?php echo $_SESSION["username"]; ?></h2><br></br>
-            <h5>You have unreviewed reports from:</h5> 
+            </nav>            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+            <select class="browser-default custom-select" name="type">
+                <option value="AWS" selected>AWS</option>
+                <option value="AMO">AMO</option>
+                <option value="AMO">MWO</option>
+                <option value="AMS">AMS</option>
+                <option value="RMC">RMC</option>
+                <option value="MC">MC</option>
+                <option value="MO">MO</option>
+            </select><br><br>
+            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            </form><br><br>
+            <?php
+                require_once('./utilities/db_connection.php');
+                $type = $_POST["type"];
+                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND type = '$type';";
+                $res = getResult($query);
+                $num = mysqli_num_rows($res);
+            ?>
+            <strong>Instruments not working : <?php echo $num; ?></strong>
             <table>
                 <tr>
-                    <th>Inspector</th>
+                	<th>Officer</th>
                     <th>Observatory</th>
-                    <th>Type</th>
                     <th>Date</th>
-                    <th>View Report</th>
-                    <th>Download Report</th>
+                    <th>Type</th>
+                    <th>State</th>
+                    <th>Instrument Not Working</th>
                 </tr>
-                <?php
-                    require_once('./utilities/db_connection.php');
-                    $query = "SELECT DISTINCT inspector,observatory,type,date_recorded FROM report WHERE reviewed = 0;";
-                    $res = getResult($query);
-                ?>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
-                        <td><?php echo $row1[0];?></td>
-                        <td><?php echo $row1[1];?></td>
-                        <td><?php echo $row1[2];?></td>
-                        <td><?php echo $row1[3];?></td>
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
-                        <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
+                        <td><?php echo $row1['inspector'];?></td>
+                        <td><?php echo $row1['observatory'];?></td>
+                        <td><?php echo $row1['date_recorded'];?></td>
+                        <td><?php echo $row1['type'];?></td>
+                        <?php
+                            $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
+                            $sub_res = getResult($sub_query);
+                            while($row2 = mysqli_fetch_array($sub_res)):;?>
+                                <td><?php echo $row2[0]; ?></td>
+                         <?php endwhile; ?>
+                        <td><?php echo $row2[0]; ?></td>
+                        <td><?php echo $row1['instrument']; ?></td>
+                    </tr>
+                <?php endwhile;?>
+            </table><br><br>
+
+            <?php
+                require_once('./utilities/db_connection.php');
+                $type = $_POST["type"];
+                $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND type = '$type';";
+                $res = getResult($query);
+                $num2 = mysqli_num_rows($res);
+            ?>
+            <strong>Instruments not available in : <?php echo $num2; ?></strong>
+            <table>
+                <tr>
+                	<th>Officer</th>
+                    <th>Observatory</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>State</th>
+                    <th width="20%">Instrument Not Available</th>
+                </tr>
+                <?php while($row1 = mysqli_fetch_array($res)):;?>
+                    <tr>
+                        <td><?php echo $row1['inspector'];?></td>
+                        <td><?php echo $row1['observatory'];?></td>
+                        <td><?php echo $row1['date_recorded'];?></td>
+                        <td><?php echo $row1['type'];?></td>
+                        <?php
+                            $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
+                            $sub_res = getResult($sub_query);
+                            while($row2 = mysqli_fetch_array($sub_res)):;?>
+                                <td><?php echo $row2[0]; ?></td>
+                         <?php endwhile; ?>
+                        <td><?php echo $row2[0]; ?></td>
+                        <td><?php echo $row1['instrument']; ?></td>
                     </tr>
                 <?php endwhile;?>
             </table>
@@ -179,5 +229,4 @@ if(!$set){
         });
     </script>
 </body>
-
 </html>

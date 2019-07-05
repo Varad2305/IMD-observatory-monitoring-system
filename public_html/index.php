@@ -3,8 +3,6 @@
     unset($_SESSION['username']);
     unset($_SESSION['status']);
     session_destroy();
-    if(isset($_SESSION["username"])) echo "1";
-    else echo "2";
 ?>
 <html>
 <head>
@@ -15,6 +13,12 @@
         .bottomright {
             position: absolute;
             bottom: 8px;
+            right: 25px;
+            font-size: 18px;
+        }
+        .bottomright2 {
+            position: absolute;
+            bottom: 6px;
             right: 16px;
             font-size: 18px;
         }
@@ -56,7 +60,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="text-center">
@@ -64,7 +68,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </form>
                                 <?php
                                     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -79,6 +83,6 @@
             </div>
         </div>
     </div>
-    <div class="bottomright">Website by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a></div><br>
+    <!-- <div class="bottomright">Website by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a></div><br> -->
 </body>
 </html>

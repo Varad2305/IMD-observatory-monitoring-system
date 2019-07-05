@@ -10,6 +10,7 @@
 				if($row["password"] == $hashed_pwd){
 					//correct password
 					session_start();
+					echo "<script> alert('Setting variables') </script>";	
 					$_SESSION["username"] = $username;
 					$_SESSION["status"] = $row["status"];
 					if($row['status'] == 0){

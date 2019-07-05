@@ -1,13 +1,17 @@
 <?php
 session_start();
-$set = isset($_SESSION["username"]) && isset($_SESSION["status"]);
+ob_start();
+$set = isset($_SESSION["username"]);
 if(!$set){
+    echo "<script> alert('Unsetting'); </script>";
 	unset($_SESSION["username"]);
 	unset($_SESSION["status"]);
 	header("Location: index.html?error=timed_out");
+    ob_end_flush();
 	session_destroy();
 	exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +55,7 @@ if(!$set){
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Observatory Monitoring System</h3>
+                <h3>Observatory Monitoring System <?php echo $set;?><h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -113,7 +117,7 @@ if(!$set){
                     </button>
                     <span>IMD SIMS</span>
                     <form action="/IMD/public_html/index.php" method="get">
-                        <button type="submit" class="btn btn-info">
+                        <button type="submit" class="btn btn-info" name="signout">
                             <i class="fa fa-sign-out"></i>
                             <span>Sign out</span>
                         </button>
@@ -123,7 +127,7 @@ if(!$set){
                     </button>
                 </div>
             </nav>
-            <h2>Welcome Admin</h2><br></br>
+            <h2>Welcome <?php echo $_SESSION["username"]; ?></h2><br></br>
             <h5>You have unreviewed reports from:</h5> 
             <table>
                 <tr>

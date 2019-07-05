@@ -184,8 +184,8 @@ if(!$set){
                             <?php endwhile; ?>
                             <td><?php echo $row1['type'];?></td>
                             <td><?php echo $row1['date_recorded'];?></td>
-                            <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
-                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
+                            <td><?php echo "<a href = report.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>View Report</a>";?></td>
+                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>Download Report</a>";?></td>
                         </tr>
                     <?php endwhile;?>
                     <tr></tr>
@@ -215,8 +215,8 @@ if(!$set){
                             <?php endwhile; ?>
                             <td><?php echo $row1['type'];?></td>
                             <td><?php echo $row1['date_recorded'];?></td>
-                            <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
-                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
+                            <td><?php echo "<a href = report.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>View Report</a>";?></td>
+                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>Download Report</a>";?></td>
                         </tr>
                     <?php endwhile;?>
                     <tr></tr>
@@ -247,8 +247,8 @@ if(!$set){
                             <?php endwhile; ?>
                             <td><?php echo $row1['type'];?></td>
                             <td><?php echo $row1['date_recorded'];?></td>
-                            <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
-                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
+                            <td><?php echo "<a href = report.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>View Report</a>";?></td>
+                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>Download Report</a>";?></td>
                         </tr>
                     <?php endwhile;?>
                     <tr></tr>

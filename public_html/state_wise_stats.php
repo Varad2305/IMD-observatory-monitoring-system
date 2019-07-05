@@ -171,8 +171,8 @@ if(!$set){
                         <td><?php echo $row1[1];?></td>
                         <td><?php echo $row1[2];?></td>
                         <td><?php echo $row1[0];?></td>                        
-                        <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[0]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
-                        <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[0]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
+                        <td><?php echo "<a href = report.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>View Report</a>";?></td>
+                        <td><?php echo "<a href = generate_pdf.php?obs='".$row1['observatory']."'&date='".$row1['date_recorded']."'&type='".$row1['type']."' target='_blank'>Download Report</a>";?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

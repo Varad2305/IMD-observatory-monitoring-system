@@ -40,6 +40,7 @@ if(!$set){
 				1.Date and time are filled in by the system itself.<br>
 				2.Fill all the rows to submit the report successfully.<br>
 				3.You can submit only one report a day.<br>
+				4.Please limit the remark to 5 words<br>
 			</div>
 		</div>
 	</div>

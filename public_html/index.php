@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<?php 
-    session_destroy();
+<?php
     unset($_SESSION['username']);
     unset($_SESSION['status']);
+    session_destroy();
+    if(isset($_SESSION["username"])) echo "1";
+    else echo "2";
 ?>
 <html>
 <head>

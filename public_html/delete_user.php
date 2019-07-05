@@ -55,16 +55,21 @@ if(!$set){
     <center>
         <table class="roundedCorners">
         <tr style="background-color: #141414">
-            <center><th><font color= #f5f0f0>Users</font></th></center>
+            <center><th><font color= #f5f0f0>User</font></th></center>
+            <center><th><font color= #f5f0f0>Type</font></th></center>
         </tr>
         <?php
             require_once('./utilities/db_connection.php');
-            $query = "SELECT username FROM users";
+            $query = "SELECT username,status FROM users";
             $res = getResult($query);
         ?>
         <?php while($row1 = mysqli_fetch_array($res)):;?>
             <tr>    
                 <td><?php echo "<a onclick=\"return confirm('Delete this user?')\" href=\"delete_user_conf.php?username=".$row1[0]."\"> $row1[0]</a>"; ?></td>
+                <td><?php 
+                    if($row1[1]) echo "Officer";
+                    else echo "Admin";
+                ?></td>
             </tr>
             
         <?php endwhile; ?>

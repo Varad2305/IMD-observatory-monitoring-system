@@ -111,7 +111,7 @@ if(!$set){
         	require_once('./utilities/db_connection.php');
         	$query = "SELECT * FROM images WHERE date_recorded = '$date' AND observatory = '$obs' AND type = '$type';";
         	$result = getResult($query);
-        	while ($row = mysqli_fetch_array($result)) {
+        	while ($row = mysqli_fetch_array($result)){
       			echo "<div id='img_div'>";
         		echo "<img src='images/".$row['image']."' style='max-width:70%;height:auto'>";
         		echo "<p>".$row['image_text']."</p>";
@@ -125,7 +125,6 @@ if(!$set){
         	$res2 = getResult($query2);
         }
         ?>
-
 	</table></center>
 </body>
 </html>

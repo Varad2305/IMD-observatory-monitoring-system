@@ -85,12 +85,12 @@ if(!$set){
       <div class="custom-select" style="width:200px;">
         <select name="obs_type" tabindex="4" class="dropdown-menu">
           <option value="AWS">AWS</option>
-          <option value="AMO">Aerodrome Met Observatory</option>
-          <option value="AMS">Aerodrome Met Station</option>
-          <option value=MWO>Meteorological Watch Office</option>
-          <option value="MC">Meteorological Centre</option>
-          <option value="RMC">Regional Meteorological Centre</option>
-          <option value="MO">Meteorological Observatory</option>
+          <option value="AMO">AMO</option>
+          <option value="AMS">AMS</option>
+          <option value=MWO>MWO</option>
+          <option value="MC">MC</option>
+          <option value="RMC">RMC</option>
+          <option value="MO">MO</option>
         </select>
       </div>
     </fieldset>

@@ -38,13 +38,17 @@ if(!$set){
       <input placeholder="Password" type="password" name="password"  tabindex="1" required autofocus>
     </fieldset>
     <fieldset>
+      <input placeholder="Password" type="radio" name="type"  tabindex="1" value="0" required autofocus>Officer &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <input placeholder="Password" type="radio" name="type"  tabindex="2" value="1" required autofocus>Admin
+    </fieldset>
+    <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
   </form>
   <?php
   	if($_SERVER["REQUEST_METHOD"] == "POST"){
   		require_once('./utilities/db_connection.php');
-    	$query = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["username"]."','".$_POST["password"]."','123',1);";
+    	$query = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["username"]."','".$_POST["password"]."','123',".$_POST["type"].");";
     	$check = getResult($query);
     	if($check){
     		header("Location:add_user_conf.php");

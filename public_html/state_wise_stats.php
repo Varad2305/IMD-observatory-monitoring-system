@@ -69,7 +69,7 @@ if(!$set){
                             <a href="state_wise_stats.php">State-wise</a>
                         </li>
                         <li>
-                            <a href="#">Page 2</a>
+                            <a href="instrument_wise_stats.php">Instrument-wise</a>
                         </li>
                         <li>
                             <a href="#">Page 3</a>

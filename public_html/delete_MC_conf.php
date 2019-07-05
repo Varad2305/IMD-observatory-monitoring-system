@@ -11,6 +11,7 @@ if(!$set){
 ?>
 <?php
 	$obs = trim($_GET["obs"],"'");
+	$type = trim($_GET["type"],"'");
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,7 @@ if(!$set){
 	<?php
 		echo $obs;
 		include('./utilities/db_connection.php');
-		$query = "DELETE FROM mc WHERE name = '$obs';";
+		$query = "DELETE FROM mc WHERE name = '$obs' AND type = '$type';";
 		$res = getResult($query);
 		if($res != FALSE){
 		header("Location:delete_MC.php");

@@ -56,15 +56,17 @@ if(!$set){
         <table class="roundedCorners">
         <tr style="background-color: #141414">
             <center><th><font color= #f5f0f0>Observatory</font></th></center>
+            <center><th><font color= #f5f0f0>Type</font></th></center>
         </tr>
         <?php
             require_once('./utilities/db_connection.php');
-            $query = "SELECT name FROM mc";
+            $query = "SELECT name,type FROM mc";
             $res = getResult($query);
         ?>
         <?php while($row1 = mysqli_fetch_array($res)):;?>
             <tr>    
-                <td><?php echo "<a onclick=\"return confirm('Delete this record?')\" href=\"delete_MC_conf.php?obs=".$row1[0]."\"> $row1[0]</a>"; ?></td>
+                <td><?php echo "<a onclick=\"return confirm('Delete this record?')\" href=\"delete_MC_conf.php?obs=".$row1[0]."&type=".$row1[1]."\"> $row1[0]</a>"; ?></td>
+                <td><?php echo $row1[1];?></td>
             </tr>
             
         <?php endwhile; ?>

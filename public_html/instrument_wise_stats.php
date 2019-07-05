@@ -143,33 +143,49 @@ if(!$set){
 
                     $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 1 AND instrument = '$instrument';";
                     $res_working = getResult($query);
+                    $total_working = mysqli_num_rows($res_working);
 
                     $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = 0 AND instrument = '$instrument';";
                     $res_not_working = getResult($query);
+                    $total_not_working = mysqli_num_rows($res_not_working);
 
                     $query = "SELECT * FROM report INNER JOIN (SELECT observatory,MAX(date_recorded) as top_date FROM report GROUP BY observatory) AS each_item ON each_item.top_date = report.date_recorded AND each_item.observatory = report.observatory AND working = -1 AND instrument = '$instrument';";
                     $res_not_available = getResult($query);
+                    $total_not_available = mysqli_num_rows($res_not_available);
                 }
 
             ?>
             <div class="browser-default">
             </div><br><br>
+            <strong><?php echo $instrument; ?></strong>
+            <center><div id="piechart"></div></center>
             <div>
                 <strong>Working in:</strong>
                 <table>
                     <tr>
-                        <th width="50%">Observatory</th>
-                        <th width="50%">State</th>
+                        <th>Inspector</th>
+                        <th>Observatory</th>
+                        <th>State</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>View Report</th>
+                        <th>Download Report</th>
+                    </tr>
                     </tr>
                     <?php while($row1 = mysqli_fetch_array($res_working)):;?>
                         <tr>
-                            <td width="50%"><?php echo $row1[2];?></td>
+                            <td><?php echo $row1['inspector'];?></td>
+                            <td><?php echo $row1['observatory'];?></td>
                             <?php
                                 $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
                                 $sub_res = getResult($sub_query);
                                 while($row2 = mysqli_fetch_array($sub_res)):;?>
-                                    <td width="50%"><?php echo $row2[0]; ?></td>
-                                <?php endwhile; ?>
+                                    <td><?php echo $row2[0]; ?></td>
+                            <?php endwhile; ?>
+                            <td><?php echo $row1['type'];?></td>
+                            <td><?php echo $row1['date_recorded'];?></td>
+                            <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
+                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
                         </tr>
                     <?php endwhile;?>
                     <tr></tr>
@@ -178,43 +194,88 @@ if(!$set){
                 <strong>Not Working in:</strong>
                 <table>
                     <tr>
-                        <th width="50%">Observatory</th>
-                        <th width="50%">State</th>
+                        <th>Inspector</th>
+                        <th>Observatory</th>
+                        <th>State</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>View Report</th>
+                        <th>Download Report</th>
+                    </tr>
                     </tr>
                     <?php while($row1 = mysqli_fetch_array($res_not_working)):;?>
                         <tr>
-                            <td width="50%"><?php echo $row1[2];?></td>
+                            <td><?php echo $row1['inspector'];?></td>
+                            <td><?php echo $row1['observatory'];?></td>
                             <?php
                                 $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
                                 $sub_res = getResult($sub_query);
                                 while($row2 = mysqli_fetch_array($sub_res)):;?>
-                                    <td width="50%"><?php echo $row2[0]; ?></td>
-                                <?php endwhile; ?>
-                        </tr>
-                    <?php endwhile;?>
-                    <tr></tr>
-                </table>
-                <br><br>
-                <strong>Not Available in:</strong>
-                <table>
-                    <tr>
-                        <th width="50%">Observatory</th>
-                        <th width="50%">State</th>
-                    </tr>
-                    <?php while($row1 = mysqli_fetch_array($res_not_available)):;?>
-                        <tr>
-                            <td width="50%"><?php echo $row1[2];?></td>
-                            <?php
-                                $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
-                                $sub_res = getResult($sub_query);
-                                while($row2 = mysqli_fetch_array($sub_res)):;?>
-                                    <td width="50%"><?php echo $row2[0]; ?></td>
-                                <?php endwhile; ?>
+                                    <td><?php echo $row2[0]; ?></td>
+                            <?php endwhile; ?>
+                            <td><?php echo $row1['type'];?></td>
+                            <td><?php echo $row1['date_recorded'];?></td>
+                            <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
+                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
                         </tr>
                     <?php endwhile;?>
                     <tr></tr>
                 </table>
             </div>
+            <br><br>
+            <strong>Not Available in:</strong>
+                <table>
+                    <tr>
+                        <th>Inspector</th>
+                        <th>Observatory</th>
+                        <th>State</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>View Report</th>
+                        <th>Download Report</th>
+                    </tr>
+                    </tr>
+                    <?php while($row1 = mysqli_fetch_array($res_not_available)):;?>
+                        <tr>
+                            <td><?php echo $row1['inspector'];?></td>
+                            <td><?php echo $row1['observatory'];?></td>
+                            <?php
+                                $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
+                                $sub_res = getResult($sub_query);
+                                while($row2 = mysqli_fetch_array($sub_res)):;?>
+                                    <td><?php echo $row2[0]; ?></td>
+                            <?php endwhile; ?>
+                            <td><?php echo $row1['type'];?></td>
+                            <td><?php echo $row1['date_recorded'];?></td>
+                            <td><?php echo "<a href = report.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>View Report</a>";?></td>
+                            <td><?php echo "<a href = generate_pdf.php?obs='".$row1[1]."'&date='".$row1[3]."'&type='".$row1[2]."' target='_blank'>Download Report</a>";?></td>
+                        </tr>
+                    <?php endwhile;?>
+                    <tr></tr>
+                </table>
+            </div>
+            <br><br>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(all_instruments);
+
+                function all_instruments() {
+                    var total_working = <?php echo $total_working; ?>;
+                    var total_not_working = <?php echo $total_not_working; ?>;
+                    var total_not_available = <?php echo $total_not_available; ?>;
+                    var data = google.visualization.arrayToDataTable([
+                        ['Status', 'Number'],
+                        ['Working', total_working],
+                        ['Not Working', total_not_working],
+                        ['Not Available', total_not_available]
+                    ]);
+                    var options = {'title':'Current statistics for <?php echo $instrument; ?>', 'width':550, 'height':400};
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            </script>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

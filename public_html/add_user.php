@@ -14,7 +14,7 @@ if(!$set){
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/add_MC.css">
-	<title>Add MC</title>
+	<title>Add User</title>
 </head>
 <style>
   .dropdown-menu{
@@ -47,9 +47,8 @@ if(!$set){
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
-    <fieldset>
-      <a href="mailto:<?php echo $_POST["email"];?>?subject=Your%20Credentials&body=Username:<?php echo $_POST["username"];?>%0D%0APassword:<?php echo $_POST["password"];?>" target = "_blank"class="btn btn-primary">Send Email</a>
-    </fieldset>
+      <a href="mailto:<?php echo $_POST["email"];?>?subject=Your%20IMD%20SIMS%20Login%20Credentials&body=Username:<?php echo $_POST["username"];?>%0D%0APassword:<?php echo $_POST["password"];?>" target = "_blank"class="btn btn-primary">Send Email</a><br>
+      <a class="btn btn-primary" href="admin.php" role="button">Go Back</a>
   </form>
   <?php
   	if($_SERVER["REQUEST_METHOD"] == "POST"){

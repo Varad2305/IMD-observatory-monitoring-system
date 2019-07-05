@@ -97,6 +97,7 @@ if(!$set){
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
+    <a href="admin.php">Go back</a>
   </form>
   <?php
   	if($_SERVER["REQUEST_METHOD"] == "POST"){

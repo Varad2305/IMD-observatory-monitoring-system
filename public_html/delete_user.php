@@ -77,7 +77,7 @@ if(!$set){
     </center>
     <br><br>
     <div>
-            <a class="btn btn-primary" href="admin.php" role="button" style="margin-left: 3em;">Go Back</a>
+        <a class="btn btn-primary" href="admin.php" role="button" style="margin-left: 3em;">Go Back</a>
     </div>
 </body>
 </html> 

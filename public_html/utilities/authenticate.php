@@ -5,9 +5,9 @@
 		if($result = getResult($query)){
 			if(mysqli_num_rows($result) == 1){
 				$row = mysqli_fetch_array($result);
-				//$salt = $row['salt'];
-				//$hashed_pwd = hash('sha512', $key + $salt);
-				if($row["password"] == $pwd){
+				$salt = $row['salt'];
+				$hashed_pwd = hash('sha512', $pwd + $salt);
+				if($row["password"] == $hashed_pwd){
 					//correct password
 					session_start();
 					$_SESSION["username"] = $username;

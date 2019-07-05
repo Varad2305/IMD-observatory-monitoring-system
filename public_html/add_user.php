@@ -48,7 +48,8 @@ if(!$set){
   <?php
   	if($_SERVER["REQUEST_METHOD"] == "POST"){
   		require_once('./utilities/db_connection.php');
-    	$query = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["username"]."','".$_POST["password"]."','123',".$_POST["type"].");";
+      $hashed_pwd = hash('sha512',$_POST["password"] + '123');
+    	$query = "INSERT INTO users(username,password,salt,status) VALUES ('".$_POST["username"]."','$hashed_pwd','123',".$_POST["type"].");";
     	$check = getResult($query);
     	if($check){
     		header("Location:add_user_conf.php");

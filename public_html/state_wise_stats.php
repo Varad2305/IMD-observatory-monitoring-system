@@ -72,8 +72,8 @@ if(!$set){
                             <a href="instrument_wise_stats.php">Instrument-wise</a>
                         </li>
                         <li>
-                            <a href="#">Page 3</a>
-                           </li>
+                            <a href="type_wise_stats.php">Type-Wise</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

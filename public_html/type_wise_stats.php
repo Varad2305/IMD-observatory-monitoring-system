@@ -72,8 +72,8 @@ if(!$set){
                             <a href="instrument_wise_stats.php">Instrument-wise</a>
                         </li>
                         <li>
-                            <a href="#">Page 3</a>
-                           </li>
+                            <a href="type_wise_stats.php">Type-Wise</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -143,27 +143,26 @@ if(!$set){
             <strong>Instruments not working : <?php echo $num; ?></strong>
             <table>
                 <tr>
-                	<th>Officer</th>
-                    <th>Observatory</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>State</th>
-                    <th>Instrument Not Working</th>
+                	<th width="15%">Officer</th>
+                    <th width="15%">Observatory</th>
+                    <th width="15%">Date</th>
+                    <th width="15%">Type</th>
+                    <th width="15%">State</th>
+                    <th width="15%">Instrument Not Working</th>
                 </tr>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
-                        <td><?php echo $row1['inspector'];?></td>
-                        <td><?php echo $row1['observatory'];?></td>
-                        <td><?php echo $row1['date_recorded'];?></td>
-                        <td><?php echo $row1['type'];?></td>
+                        <td width="15%"><?php echo $row1['inspector'];?></td>
+                        <td width="15%"><?php echo $row1['observatory'];?></td>
+                        <td width="15%"><?php echo $row1['date_recorded'];?></td>
+                        <td width="15%"><?php echo $row1['type'];?></td>
                         <?php
                             $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
                             $sub_res = getResult($sub_query);
                             while($row2 = mysqli_fetch_array($sub_res)):;?>
-                                <td><?php echo $row2[0]; ?></td>
+                                <td width="15%"><?php echo $row2[0]; ?></td>
                          <?php endwhile; ?>
-                        <td><?php echo $row2[0]; ?></td>
-                        <td><?php echo $row1['instrument']; ?></td>
+                        <td width="15%"><?php echo $row1['instrument']; ?></td>
                     </tr>
                 <?php endwhile;?>
             </table><br><br>
@@ -178,27 +177,26 @@ if(!$set){
             <strong>Instruments not available in : <?php echo $num2; ?></strong>
             <table>
                 <tr>
-                	<th>Officer</th>
-                    <th>Observatory</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>State</th>
-                    <th width="20%">Instrument Not Available</th>
+                	<th width="15%">Officer</th>
+                    <th width="15%">Observatory</th>
+                    <th width="15%">Date</th>
+                    <th width="15%">Type</th>
+                    <th width="15%">State</th>
+                    <th width="15%">Instrument Not Available</th>
                 </tr>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
-                        <td><?php echo $row1['inspector'];?></td>
-                        <td><?php echo $row1['observatory'];?></td>
-                        <td><?php echo $row1['date_recorded'];?></td>
-                        <td><?php echo $row1['type'];?></td>
+                        <td width="15%"><?php echo $row1['inspector'];?></td>
+                        <td width="15%"><?php echo $row1['observatory'];?></td>
+                        <td width="15%"><?php echo $row1['date_recorded'];?></td>
+                        <td width="15%"><?php echo $row1['type'];?></td>
                         <?php
                             $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
                             $sub_res = getResult($sub_query);
                             while($row2 = mysqli_fetch_array($sub_res)):;?>
-                                <td><?php echo $row2[0]; ?></td>
+                                <td width="15%"><?php echo $row2[0]; ?></td>
                          <?php endwhile; ?>
-                        <td><?php echo $row2[0]; ?></td>
-                        <td><?php echo $row1['instrument']; ?></td>
+                        <td width="15%"><?php echo $row1['instrument']; ?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

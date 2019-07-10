@@ -72,7 +72,7 @@ if(!$set){
                         <span>Toggle Sidebar</span>
                     </button>
                     <span>IMD SIMS</span>
-                    <form action="./index.php" method="get">
+                    <form action="./sign_out_conf.php" method="get">
                         <button type="submit" class="btn btn-info">
                             <i class="fa fa-sign-out"></i>
                             <span>Sign out</span>

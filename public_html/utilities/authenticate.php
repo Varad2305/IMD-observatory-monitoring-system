@@ -1,7 +1,7 @@
 <?php
 	function authenticate($username,$pwd){
 		require_once('db_connection.php');
-		$query = "SELECT username,password,salt,status from users where username = '$username';";
+		$query = "SELECT username,password,salt,status FROM users WHERE username = '$username';";
 		if($result = getResult($query)){
 			if(mysqli_num_rows($result) == 1){
 				$row = mysqli_fetch_array($result);
@@ -10,7 +10,6 @@
 				if($row["password"] == $hashed_pwd){
 					//correct password
 					session_start();
-					echo "<script> alert('Setting variables') </script>";	
 					$_SESSION["username"] = $username;
 					$_SESSION["status"] = $row["status"];
 					if($row['status'] == 0){

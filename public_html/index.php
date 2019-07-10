@@ -1,9 +1,7 @@
-<!DOCTYPE html>
 <?php
-    unset($_SESSION['username']);
-    unset($_SESSION['status']);
-    session_destroy();
+session_start();
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <title>IMD</title>
@@ -60,19 +58,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </form>
                                 <?php
                                     if($_SERVER["REQUEST_METHOD"] == "POST"){
                                         require_once('./utilities/authenticate.php');
+                                        //echo $_POST['username'];
                                         authenticate($_POST['username'],$_POST['password']);
                                     }
                                 ?>
@@ -83,6 +73,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="bottomright">Website by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a></div><br> -->
+    <div class="bottomright">Portal by <a href="https://github.com/Varad2305" target="_blank">Varad Kshirsagar</a> and <a href="https://github.com/burhanboxwalla" target="_blank">Burhan Boxwalla</a><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp from BITS Pilani</div><br></br>
 </body>
 </html>

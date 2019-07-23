@@ -9,6 +9,14 @@ if(!$set){
 	session_destroy();
 	exit();
 }
+if($_SESSION["status"] == 0){
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    ob_end_flush();
+    session_destroy();
+    exit();   
+}
 ?>
 <?php
 	$type = trim($_GET["type"],"'");
@@ -68,7 +76,7 @@ if(!$set){
 				<th>WORKING</th>
 				<th>NOT WORKING</th>
 				<th>NOT AVAILABLE</th>
-				<th>REASON FOR NOT WORKING</th>
+				<th>REMEDIAL ACTION</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -8,6 +8,15 @@ if(!$set){
     session_destroy();
     exit();
 }
+
+if($_SESSION["status"] == 1){
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    ob_end_flush();
+    session_destroy();
+    exit();   
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -103,7 +112,6 @@ if(!$set){
 
         <!-- Page Content  -->
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-info">

@@ -8,7 +8,18 @@ if(!$set){
     session_destroy();
     exit();
 }
+
+if($_SESSION["status"] == 1){
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    ob_end_flush();
+    session_destroy();
+    exit();   
+}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -123,13 +134,14 @@ if(!$set){
                 </div>
             </nav>            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
             <select class="browser-default custom-select" name="type">
-                <option value="AWS" selected>AWS</option>
+                <option value="SO">Surface Observatory</option>
+                <option value="ARG">ARG</option>
+                <option value="Radiosonde">Radiosonde</option>
+                <option value="Agromet">Agromet Observatory</option>
+                <option value="MWO">MWO</option>
                 <option value="AMO">AMO</option>
-                <option value="AMO">MWO</option>
                 <option value="AMS">AMS</option>
-                <option value="RMC">RMC</option>
-                <option value="MC">MC</option>
-                <option value="MO">MO</option>
+                <option value="AWS">AWS</option>
             </select><br><br>
             <input type="submit" class="btn btn-primary" name="submit" value="Submit">
             </form><br><br>
@@ -146,16 +158,15 @@ if(!$set){
                 	<th width="15%">Officer</th>
                     <th width="15%">Observatory</th>
                     <th width="15%">Date</th>
-                    <th width="15%">Type</th>
                     <th width="15%">State</th>
                     <th width="15%">Instrument Not Working</th>
+                    <th width="15%">Remedial Action</th>
                 </tr>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
                         <td width="15%"><?php echo $row1['inspector'];?></td>
                         <td width="15%"><?php echo $row1['observatory'];?></td>
                         <td width="15%"><?php echo $row1['date_recorded'];?></td>
-                        <td width="15%"><?php echo $row1['type'];?></td>
                         <?php
                             $sub_query = "SELECT DISTINCT state FROM mc WHERE name = '".$row1[2]."';";
                             $sub_res = getResult($sub_query);
@@ -163,6 +174,7 @@ if(!$set){
                                 <td width="15%"><?php echo $row2[0]; ?></td>
                          <?php endwhile; ?>
                         <td width="15%"><?php echo $row1['instrument']; ?></td>
+                        <td width="15%"><?php echo $row1['remark']; ?></td>
                     </tr>
                 <?php endwhile;?>
             </table><br><br>
@@ -180,9 +192,9 @@ if(!$set){
                 	<th width="15%">Officer</th>
                     <th width="15%">Observatory</th>
                     <th width="15%">Date</th>
-                    <th width="15%">Type</th>
                     <th width="15%">State</th>
                     <th width="15%">Instrument Not Available</th>
+                    <th width="15%">Remedial Action</th>
                 </tr>
                 <?php while($row1 = mysqli_fetch_array($res)):;?>
                     <tr>
@@ -195,8 +207,9 @@ if(!$set){
                             $sub_res = getResult($sub_query);
                             while($row2 = mysqli_fetch_array($sub_res)):;?>
                                 <td width="15%"><?php echo $row2[0]; ?></td>
-                         <?php endwhile; ?>
+                         	<?php endwhile; ?>
                         <td width="15%"><?php echo $row1['instrument']; ?></td>
+                        <td width="15%"><?php echo $row1['remark']; ?></td>
                     </tr>
                 <?php endwhile;?>
             </table>

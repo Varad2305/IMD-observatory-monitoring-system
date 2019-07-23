@@ -8,6 +8,15 @@ if(!$set){
     session_destroy();
     exit();
 }
+
+if($_SESSION["status"] == 1){
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    ob_end_flush();
+    session_destroy();
+    exit();   
+}
 ?>
 
 <!DOCTYPE html>

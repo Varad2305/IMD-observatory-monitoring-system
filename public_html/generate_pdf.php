@@ -99,7 +99,9 @@ foreach($result as $row) {
 $images = getResult( "SELECT * FROM images where date_recorded = '$date' and observatory = '$obs' and type = '$type';");
 while ($row = mysqli_fetch_array($images)) {
     $pdf->AddPage();
-    $pdf->image('images/'.$row['image'] , 10 , 65, 180,0);
+    $pdf->image('images/'.$row['image'] , 10 , 65, 180,0); //putting height in auto-adjust
+    //$pdf->Ln();
+    $pdf->Cell(180,210,$row['image_text'],0,0,'C');
 }
 
 $pdf->Output();

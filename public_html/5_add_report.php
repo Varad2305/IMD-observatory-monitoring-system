@@ -18,12 +18,10 @@ if($_SESSION["status"] == 0){
     exit();   
 }
 ?>
-
 <?php
 	$type = trim($_GET["type"],"'");
 	$state = trim($_GET["state"],"'");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,81 +144,81 @@ if($_SESSION["status"] == 0){
 					<td><input type="text" name="Thermograph" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>Barograph</td>
+					<td>Hair Hygrograph</td>
 					<td><input type="radio" name="10" value=1></td>
 					<td><input type="radio" name="10" value=0></td>
 					<td><input type="radio" name="10" value=-1></td>
-					<td><input type="text" name="Barograph" placeholder="Remark.."></td>
-			</tr>
-			<tr>
-					<td>Hydrograph</td>
-					<td><input type="radio" name="11" value=1></td>
-					<td><input type="radio" name="11" value=0></td>
-					<td><input type="radio" name="11" value=-1></td>
-					<td><input type="text" name="Hydrograph" placeholder="Remark.."></td>
+					<td><input type="text" name="Hair_Hygrograph" placeholder="Remark.."></td>
 			</tr>
 			<tr>
 					<td>Ordinary Rain Gauge</td>
-					<td><input type="radio" name="12" value=1></td>
-					<td><input type="radio" name="12" value=0></td>
-					<td><input type="radio" name="12" value=-1></td>
+					<td><input type="radio" name="11" value=1></td>
+					<td><input type="radio" name="11" value=0></td>
+					<td><input type="radio" name="11" value=-1></td>
 					<td><input type="text" name="Ordinary_Rain_Gauge" placeholder="Remark.."></td>
 			</tr>
 			<tr>
 					<td>Self Recording Rain Gauge</td>
+					<td><input type="radio" name="12" value=1></td>
+					<td><input type="radio" name="12" value=0></td>
+					<td><input type="radio" name="12" value=-1></td>
+					<td><input type="text" name="Self_Recording_Rain_Gauge" placeholder="Remark.."></td>
+			</tr>
+			<tr>
+					<td>Open Pan Evaporimeter</td>
 					<td><input type="radio" name="13" value=1></td>
 					<td><input type="radio" name="13" value=0></td>
 					<td><input type="radio" name="13" value=-1></td>
-					<td><input type="text" name="Self_Recording_Rain_Gaue" placeholder="Remark.."></td>
+					<td><input type="text" name="Open_Pan_Evaporimeter" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>Evaporimeter</td>
+					<td>Sunshine Recorder</td>
 					<td><input type="radio" name="14" value=1></td>
 					<td><input type="radio" name="14" value=0></td>
 					<td><input type="radio" name="14" value=-1></td>
-					<td><input type="text" name="Evaporimeter" placeholder="Remark.."></td>
+					<td><input type="text" name="Sunshine_Recorder" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>Mercury Barometer</td>
+					<td>Soil Thermometer (5cm Depth)</td>
 					<td><input type="radio" name="15" value=1></td>
 					<td><input type="radio" name="15" value=0></td>
 					<td><input type="radio" name="15" value=-1></td>
-					<td><input type="text" name="Mercury_Barometer" placeholder="Remark.."></td>
+					<td><input type="text" name="Soil_Thermometer_5" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>High Wind Speed Recorder</td>
+					<td>Soil Thermometer (10cm Depth)</td>
 					<td><input type="radio" name="16" value=1></td>
 					<td><input type="radio" name="16" value=0></td>
 					<td><input type="radio" name="16" value=-1></td>
-					<td><input type="text" name="High_Wind_Speed_Recorder" placeholder="Remark.."></td>
+					<td><input type="text" name="Soil_Thermometer_10" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>Transmissometer</td>
+					<td>Soil Thermometer (20cm Depth)</td>
 					<td><input type="radio" name="17" value=1></td>
 					<td><input type="radio" name="17" value=0></td>
 					<td><input type="radio" name="17" value=-1></td>
-					<td><input type="text" name="Transmissometer" placeholder="Remark.."></td>
+					<td><input type="text" name="Soil_Thermometer_20" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>Ceilometer</td>
+					<td>Soil Moisture Equipment</td>
 					<td><input type="radio" name="18" value=1></td>
 					<td><input type="radio" name="18" value=0></td>
 					<td><input type="radio" name="18" value=-1></td>
-					<td><input type="text" name="Ceilometer" placeholder="Remark.."></td>
+					<td><input type="text" name="Soil_Equipment" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>DCWIS</td>
+					<td>Grass Minimum Thermometer</td>
 					<td><input type="radio" name="19" value=1></td>
 					<td><input type="radio" name="19" value=0></td>
 					<td><input type="radio" name="19" value=-1></td>
-					<td><input type="text" name="DCWIS" placeholder="Remark.."></td>
+					<td><input type="text" name="Grass_Min_Thermometer" placeholder="Remark.."></td>
 			</tr>
 			<tr>
-					<td>DIIWE</td>
+					<td>Dew Gauge</td>
 					<td><input type="radio" name="20" value=1></td>
 					<td><input type="radio" name="20" value=0></td>
 					<td><input type="radio" name="20" value=-1></td>
-					<td><input type="text" name="DIIWE" placeholder="Remark.."></td>
+					<td><input type="text" name="Dew_Gauge" placeholder="Remark.."></td>
 			</tr>
 			<tr>
 				<td><a class="btn btn-primary" href="add_report.php" role="button">Go Back</a></td>
@@ -241,6 +239,7 @@ if($_SESSION["status"] == 0){
 					$working = $_POST[$instrument_number];
 					$remark = $_POST[$instrument_name];
 					$station = $_POST["station"];
+					
 					$query = "INSERT INTO report(date_recorded,inspector,observatory,type,instrument,working,reviewed,remark) VALUES(CURDATE(),'".$_SESSION["username"]."','$station','".$_SESSION["type"]."','$instrument','$working',0,'$remark');";
 					$res = getResult($query);
 					if($res === FALSE){
@@ -256,6 +255,7 @@ if($_SESSION["status"] == 0){
 							break;
 						}
 					}
+
 					if(empty($_POST["station"]))
 						$flag = 0;
 					return $flag;
@@ -270,21 +270,21 @@ if($_SESSION["status"] == 0){
 					inject("Stevenson_Screen_(Single)","7");
 					inject("Stevenson_Screen_(Double)","8");
 					inject("Thermograph","9");
-					inject("Barograph","10");
-					inject("Hydrograph","11");
-					inject("Ordinary_Rain_Gauge","12");
-					inject("Self_Recording_Rain_Gauge","13");
-					inject("Evaporimeter","14");
-					inject("Mercury_Barometer","15");
-					inject("High_Wind_Speed_Recorder","16");
-					inject("Transmissometer","17");
-					inject("Ceilometer","18");
-					inject("DCWIS","19");
-					inject("DIIWE","20");
+					inject("Hair_Hygrograph","10");
+					inject("Ordinary_Rain_Gauge","11");
+					inject("Self_Recording_Rain_Gauge","12");
+					inject("Open_Pan_Evaporimeter","13");
+					inject("Sunshine_Recorder","14");
+					inject("Soil_Thermometer_5","15");
+					inject("Soil_Thermometer_10","16");
+					inject("Soil_Thermometer_20","17");
+					inject("Soil_Equipment","18");
+					inject("Grass_Min_Thermometer","19");
+					inject("Dew_Gauge","20");
 					if($flag1 == 0){
 						echo "<script type='text/javascript'> alert('You have already filled a report today'); </script>";		
 						header("Location:add_report.php?errortype=1");
-						ob_end_flush()();
+						ob_end_flush();
 						exit();
 					}
 					else{
@@ -308,3 +308,4 @@ if($_SESSION["status"] == 0){
 </script>
 </body>
 </html>
+

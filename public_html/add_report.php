@@ -10,6 +10,15 @@ if(!$set){
 	session_destroy();
 	exit();
 }
+
+if($_SESSION["status"] == 0){
+    unset($_SESSION["username"]);
+    unset($_SESSION["status"]);
+    header("Location: index.html?error=timed_out");
+    ob_end_flush();
+    session_destroy();
+    exit();   
+}
 ?>
 <?php
     $error = trim($_GET["errortype"],"'");
@@ -58,9 +67,10 @@ if(!$set){
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <center><select class="browser-default custom-select" name="obs_type" style="width:6em;"></center>
                 <option selected>Type</option>
-                <option value="RMC">RMC</option>
-                <option value="MC">MC</option>
-                <option value="MO">MO</option>
+                <option value="SO">Surface Observatory</option>
+                <option value="ARG">ARG</option>                    <!-- Ask Biju Sir -->
+                <option value="Radiosonde">Radiosonde</option>
+                <option value="Agromet">Agromet Observatory</option>
                 <option value="MWO">MWO</option>
                 <option value="AMO">AMO</option>
                 <option value="AMS">AMS</option>
@@ -115,7 +125,7 @@ if(!$set){
         		$type = $_POST["obs_type"];
         		$state = $_POST["state"];
         		$_SESSION["type"] = $type;
-        		if($type === 'RMC' || $type === 'MC' || $type === 'MO'){
+        		if($type === 'SO'){
         			header("Location:1_add_report.php?type='$type'&state='$state'");
         			ob_end_flush();
         			exit();
@@ -130,6 +140,16 @@ if(!$set){
         			ob_end_flush();
         			exit();
         		}
+                if($type === 'ARG'){                //Ask Biju Sir
+                    header("Location:4_add_report.php?type='$type'&state='$state'");
+                    ob_end_flush();
+                    exit();
+                }
+                if($type === 'Agromet'){
+                    header("Location:5_add_report.php?type='$type'&state='$state'");
+                    ob_end_flush();
+                    exit();
+                }
         	}	
         ?>
 

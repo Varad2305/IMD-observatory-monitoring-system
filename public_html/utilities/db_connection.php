@@ -1,7 +1,7 @@
 <?php
 	function getResult($query){
-		//$config = parse_ini_file('../../private/db/config.ini');
-		//$link = mysqli_connect($config['servername'], $config['username'], $config['password'], $config['dbname']);
+		//While deploying use this function instead: 
+		//$link = mysqli_connect("localhost", "<username>", "<password>", "<dbname>");
 		$link = mysqli_connect("localhost", "root", "", "imd");
 		if (mysqli_connect_errno()){
   			echo "Failed to connect to MySQL: " . mysqli_connect_error();

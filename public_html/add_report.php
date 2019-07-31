@@ -69,7 +69,6 @@ if($_SESSION["status"] == 0){
                 <option selected>Type</option>
                 <option value="SO">Surface Observatory</option>
                 <option value="ARG">ARG</option>                    <!-- Ask Biju Sir -->
-                <option value="Radiosonde">Radiosonde</option>
                 <option value="Agromet">Agromet Observatory</option>
                 <option value="MWO">MWO</option>
                 <option value="AMO">AMO</option>

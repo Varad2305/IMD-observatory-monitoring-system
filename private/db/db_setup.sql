@@ -13,7 +13,7 @@ CREATE TABLE users(
 	salt varchar(255) NOT NULL,
 	status int NOT NULL,
 	PRIMARY KEY(username)
-	FOREIGN KEY(username) references mc(name) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY(username) references mc(name)
 );
 
 

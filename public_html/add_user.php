@@ -67,7 +67,7 @@ if($_SESSION["status"] == 1){
     	$query = "INSERT INTO users(username,email,password,salt,status) VALUES ('".$_POST["username"]."','".$_POST["email"]."','$hashed_pwd','123','".$_POST["type"]."');";
     	$check = getResult($query);
       if(!$check){
-        echo "<script> alert('Username already exists'); </script>";
+        echo "<script> alert('Username already there'); </script>";
       }
     }
   ?>

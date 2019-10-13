@@ -33,7 +33,7 @@
 			}
 		}
 		else{
-			header("Location: index.php?error=yes");
+			header("Location: index.php?err=yes");
 			exit();
 		}
 	}
